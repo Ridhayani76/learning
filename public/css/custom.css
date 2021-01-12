@@ -1,0 +1,53 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    font-size: 14px;
+}
+.hero-image {
+    width: 80%;
+}
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+.btn-success {
+    border-color: transparent;
+    background: #40c3b5;
+}
+.btn-success:hover {
+    border-color: transparent;
+    background: #2B7D75;
+}
+ion-icon {
+    font-size: 24px;
+}
+.navbar .nav-item {
+    font-weight: 500;
+}
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/*card*/
+.card {
+    background: #fff;
+}
+.card-header {
+    background: #fff;
+    border-bottom: 0px;
+}
+.card-title {
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.table {
+    border: 0px;
+}
+.table.table-striped tr td{
+    border: 0px;
+    background: #fff;
+}
+
