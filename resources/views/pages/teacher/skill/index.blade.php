@@ -11,23 +11,32 @@
                     <h1>Kompetensi</h1>
                     <p class="text-muted">Klik tombol dibawah untuk membuat kompetensi baru</p>
 
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Buat Baru</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <span class="d-flex align-items-center">
+                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Baru
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Kompetensi</li>
+            </ol>
+        </nav>
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <div>
-                            Daftar Kompetensi
-                        </div>
+                        <h5 class="card-title">Daftar Kompetensi</h5>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body" style="padding: 0px;">
 
                         @if($errors->any())
                             <div class="alert alert-danger">
@@ -39,25 +48,18 @@
 
                         <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Nomor</th>
-                                    <th>Kompetensi</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @php
-                                    $i = 1;
-                                @endphp
+                            <table class="table table-striped" style="margin-bottom: 0px;">
 
                                 @foreach($skills as $skill)
                                     <tr>
-                                        <td style="vertical-align: middle">{{$i}}</td>
-                                        <td style="vertical-align: middle">{{$skill->name}}</td>
+                                        <td style="vertical-align: middle">
+                                            <h6>Kompetensi</h6>
+                                            <span>{{$skill->name}}</span>
+                                        </td>
                                         <td style="vertical-align: middle" class="text-center">
-                                            <a href="" class="btn btn-outline-danger btn-sm mr-2">Hapus</a>
+                                            <a href="" class="btn btn-outline-danger btn-sm mr-2 line-0" style="padding: 10px">
+                                                <ion-icon name="trash-outline" size="small"></ion-icon>
+                                            </a>
                                         </td>
                                     </tr>
 

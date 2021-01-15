@@ -16,12 +16,14 @@ class TaskController extends Controller
         return $this->item = $task;
     }
 
-    public function index () {
+    public function index (Request $request) {
+        $date = $request->date ? $request->date : date('Y-m-d');
+
         $classroom = auth()->user()->student->classroom_id;
 
         $items = $this->item->where('classroom_id', $classroom)->get();
 
-        return view('pages.student.task.index', compact('items'));
+        return view('pages.student.task.index', compact('items', 'date'));
     }
 
     public function store(Request $request)

@@ -11,7 +11,11 @@
                     <h1>Tempat Praktik</h1>
                     <p class="text-muted">Klik tombol dibawah untuk membuat tempat praktik baru</p>
 
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Buat Baru</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <span class="d-flex align-items-center">
+                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Baru
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -19,16 +23,24 @@
 
 
     <div class="container">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tempat Praktik</li>
+            </ol>
+        </nav>
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <div>
+                        <h5 class="card-title">
                             Daftar Tempat Praktik
-                        </div>
+                        </h5>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body" style="padding: 0px;">
 
                         @if($errors->any())
                             <div class="alert alert-danger">
@@ -40,14 +52,7 @@
 
                         <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Nomor</th>
-                                    <th>Tempat Praktik</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                                </thead>
+                            <table class="table table-striped" style="margin-bottom: 0px;">
                                 <tbody>
                                 @php
                                     $i = 1;
@@ -55,10 +60,22 @@
 
                                 @foreach($agencies as $agency)
                                     <tr>
-                                        <td style="vertical-align: middle">{{$i}}</td>
-                                        <td style="vertical-align: middle">{{$agency->name}}</td>
+                                        <td style="vertical-align: middle">
+                                            <h6>Nama Tempat</h6>
+                                            {{$agency->name}}
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <h6>Kontak</h6>
+                                            <span class="text-muted" style="letter-spacing: 1.2px;">{{$agency->phone}}</span>
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <h6>Alamat</h6>
+                                            <span class="text-muted">{{$agency->address}}</span>
+                                        </td>
                                         <td style="vertical-align: middle" class="text-center">
-                                            <a href="" class="btn btn-outline-danger btn-sm mr-2">Hapus</a>
+                                            <a href="" class="btn btn-outline-danger btn-sm mr-2 line-0" style="padding: 10px">
+                                                <ion-icon name="trash-outline" size="small"></ion-icon>
+                                            </a>
                                         </td>
                                     </tr>
 
@@ -110,12 +127,9 @@
                             <textarea name="address" cols="30" rows="8" class="form-control"></textarea>
                         </div>
                     </div>
-
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
-                        </div>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">Simpan</button>
                 </div>
             </div>
         </div>

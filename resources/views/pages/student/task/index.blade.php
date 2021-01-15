@@ -1,17 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="jumbotron" style="margin-top: 30px;">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-4">
+                    <img src="{{asset('img/task.svg')}}" alt="" class="hero-image">
+                </div>
+                <div class="col-md-8">
+                    <h6>{{date('D, j F Y', strtotime($date))}}</h6>
+                    <h1>List Tugas</h1>
+                    <p class="text-muted">Kamu memiliki {{$items->count()}} tugas ditanggal ini.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('teacher.task.index')}}">Penugasan ({{date('j F Y', strtotime($date))}})</a></li>
+                <li class="breadcrumb-item active" aria-current="page">List Tugas</li>
+            </ol>
+        </nav>
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <div>
-                            {{ __('Tugas') }}
-                        </div>
+                        <h5 class="card-title">
+                            {{ __('List Tugas') }}
+                        </h5>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body" style="padding: 0px;">
 
                         @if($errors->any())
                             <div class="alert alert-danger">
@@ -21,49 +45,45 @@
                             </div>
                         @endif
 
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Matkul</th>
-                                    <th>Tugas</th>
-                                    <th>Dosen</th>
-                                    <th class="text-center">Form Tugas</th>
-                                    <th class="text-center">Mengupload</th>
-                                    <th class="text-center">Nilai</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($items as $item)
-                                <tr>
-                                    <td>{{$item->course->name}}</td>
-                                    <td>{{$item->title}}</td>
-                                    <td>{{$item->course->teacher->name}}</td>
-                                    <td class="text-center">
-                                        <a href="{{url(Storage::url($item->file))}}" class="btn btn-secondary btn-sm">Download</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="badge badge-{{$item->hasUploaded(auth()->user()->student->id) ? 'success' : 'warning'}}">
-                                            {{$item->hasUploaded(auth()->user()->student->id) ? 'Sudah' : 'Belum'}}
-                                        </span>
-                                    </td>
-                                    <td class="text-center">{{$item->hasUploaded(auth()->user()->student->id) ? $item->hasUploaded(auth()->user()->student->id)->assessment ? $item->hasUploaded(auth()->user()->student->id)->assessment->score : '-' : '-'}}</td>
-                                    <td class="text-center">
-                                        @if($item->hasUploaded(auth()->user()->student->id))
-                                            <a href="{{url(Storage::url($item->hasUploaded(auth()->user()->student->id)->file))}}" download="" class="btn btn-block btn-success btn-sm">Download</a>
-                                        @else
-                                        <button class="btn btn-light btn-block btn-sm" onclick="
-                                            document.getElementById('tugas').value = '{{$item->title}} - {{$item->course->name}}';
-                                            document.getElementById('task_id').value = '{{$item->id}}';
-                                            " data-toggle="modal" data-target="#exampleModal">
-                                            Upload
-                                        </button>
-                                        @endif
-                                    </td>
-                                </tr>
+                            <table class="table table-striped" style="margin: 0px;">
+                                <tbody>
+
+                                @foreach($items as $task)
+                                    <tr>
+                                        <td>
+                                            <h6>{{$task->title}}</h6>
+                                            <p class="text-muted">{{$task->course->name}}</p>
+                                        </td>
+                                        <td>
+                                            <h6>Batas pengumpulan</h6>
+                                            <p class="text-muted">{{$task->max_date_upload ? date('j F Y', strtotime($task->max_date_upload)) : '-'}}</p>
+                                        </td>
+                                        <td>
+                                            <h6>Form Tugas</h6>
+                                            <p class="text-muted">
+                                                <a href="{{$task->file}}" class="line-0 d-flex align-items-center"><ion-icon name="download-outline" size="small" class="mr-1"></ion-icon> Download</a>
+                                            </p>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{route('teacher.task.show', ['task' => $task->id])}}" class="btn btn-outline-primary btn-sm">
+                                                <span class="d-flex align-items-center">
+                                                    Lihat <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+
                                 @endforeach
-                            </tbody>
-                        </table>
+
+                                @if($items->count() == 0)
+                                    <tr>
+                                        <td colspan="6" class="text-center">Tidak ada tugas</td>
+                                    </tr>
+                                @endif
+
+                                </tbody>
+                            </table>
+
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ class Task extends Model
 {
     //
     protected $guarded = [];
+    protected $appends = ['score'];
 
     public function task_uploads () {
         return $this->hasMany(TaskUpload::class);
@@ -24,4 +25,13 @@ class Task extends Model
     public function course () {
         return $this->belongsTo(Course::class);
     }
+
+    public function getScoreAttribute ($student_id) {
+        if ($this->hasUploaded($student_id) && isset($this->hasUploaded($student_id)->assessment)) {
+            return $this->hasUploaded($student_id)->assessment->score;
+        } else {
+            return false;
+        }
+    }
+
 }

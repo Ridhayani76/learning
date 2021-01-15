@@ -8,10 +8,13 @@
                     <img src="{{asset('img/task.svg')}}" alt="" class="hero-image">
                 </div>
                 <div class="col-md-8">
-                    <h1>Penugasan</h1>
+                    <h6>Tugas {{date('j F Y', strtotime($date))}}</h6>
+                    <h1>Kelas {{$classroom->name}}</h1>
                     <p class="text-muted">Klik tombol dibawah untuk membuat tugas baru.</p>
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                        Buat Tugas
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <span class="d-flex align-items-center">
+                            <ion-icon name="add-outline" class="mr-1"></ion-icon> Buat Tugas
+                        </span>
                     </a>
                 </div>
             </div>
@@ -19,6 +22,15 @@
     </div>
 
     <div class="container">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('teacher.task.index')}}">Penugasan ({{date('j F Y', strtotime($date))}})</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Kelas {{$classroom->name}}</li>
+            </ol>
+        </nav>
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -46,17 +58,24 @@
                                 @foreach($items as $task)
                                     <tr>
                                         <td>
-                                            <h5>{{$task->title}}</h5>
+                                            <h6>{{$task->title}}</h6>
                                             <p class="text-muted">{{$task->course->name}}</p>
                                         </td>
                                         <td>
                                             <h6>Batas pengumpulan</h6>
-                                            <p class="text-muted">{{$task->max_date_upload ? $task->max_date_upload : '-'}}</p>
-
+                                            <p class="text-muted">{{$task->max_date_upload ? date('j F Y', strtotime($task->max_date_upload)) : '-'}}</p>
+                                        </td>
+                                        <td>
+                                            <h6>Dokumen Tugas</h6>
+                                            <p class="text-muted">
+                                                <a href="{{$task->file}}" class="line-0 d-flex align-items-center"><ion-icon name="download-outline" size="small" class="mr-1"></ion-icon> Download</a>
+                                            </p>
                                         </td>
                                         <td class="text-center">
-                                            <a href="" class="btn btn-link btn-sm">
-                                                Detail
+                                            <a href="{{route('teacher.task.show', ['task' => $task->id])}}" class="btn btn-outline-primary btn-sm">
+                                                <span class="d-flex align-items-center">
+                                                    Lihat <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
+                                                </span>
                                             </a>
                                         </td>
                                     </tr>
@@ -91,6 +110,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    <input type="hidden" name="classroom_id" value="{{$classroom->id}}">
+
                     <div class="form-group row align-items-center">
                         <div class="col-3 text-right">Mata Kuliah</div>
                         <div class="col-9">
@@ -99,18 +121,6 @@
                                 <option value="{{$course->id}}">
                                     {{$course->name}}
                                 </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row align-items-center">
-                        <div class="col-3 text-right">Kelas</div>
-                        <div class="col-9">
-                            <select name="classroom_id" class="form-control">
-                                @foreach(\App\Classroom::orderBy('name', 'asc')->get() as $classroom)
-                                    <option value="{{$classroom->id}}">
-                                        {{$classroom->name}}
-                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -125,6 +135,12 @@
                         <div class="col-3 text-right">File Tugas</div>
                         <div class="col-9">
                             <input type="file" class="form-control" name="file">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <div class="col-3 text-right">Batas Pengumpulan</div>
+                        <div class="col-9">
+                            <input type="date" class="form-control" name="max_date_upload">
                         </div>
                     </div>
                     <div class="row mt-3">

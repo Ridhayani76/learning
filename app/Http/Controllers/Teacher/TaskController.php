@@ -14,27 +14,45 @@ use Validator;
 
 class TaskController extends Controller
 {
-    function __construct (Task $task) {
-        return $this->item = $task;
+    function __construct (Task $task, Classroom $classroom) {
+        $this->item = $task;
+        $this->classroom = $classroom;
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = $this->item->all();
+        $date = $request->date ? $request->date : date('Y-m-d');
+        $dateDisplay = date('F j D, Y', strtotime($date));
+
+        $prev = date('Y-m-d', strtotime('-1 days', strtotime($date)));
+        $next = date('Y-m-d', strtotime('+1 days', strtotime($date)));
+
+        $classrooms = $this->classroom->with(['tasks' => function ($task) use ($date) {
+            return $task->whereDate('created_at', $date);
+        }])->orderBy('name', 'asc')->get();
+        $amount_of_tasks = $classrooms->map(function ($classroom) {
+            return $classroom->tasks->count();
+        })->flatten()->reduce(function ($total, $amount) {
+            $total += $amount;
+            return $total;
+        });
 
         //
-        return view('pages.teacher.task.index', compact('tasks'));
+        return view('pages.teacher.task.index', compact('date', 'dateDisplay', 'classrooms', 'amount_of_tasks', 'prev', 'next'));
     }
 
-    public function get_by_classroom  ($classroom) {
-        $classroom = Classroom::find($classroom);
-        $items = $this->item->where('classroom_id', $classroom->id)->get();
+    public function get_by_classroom  (Request $request, $classroom) {
+        $date = $request->date ? $request->date : date('Y-m-d');
+        $dateDisplay = date('F j D, Y', strtotime($date));
 
-        return view('pages.teacher.task.get_by_classroom', compact('items', 'classroom'));
+        $classroom = Classroom::find($classroom);
+        $items = $this->item->whereDate('created_at', $date)->where('classroom_id', $classroom->id)->get();
+
+        return view('pages.teacher.task.get_by_classroom', compact('items', 'classroom', 'date' , 'dateDisplay'));
     }
 
     /**
@@ -75,9 +93,10 @@ class TaskController extends Controller
             'file' => $path,
             'course_id' => $request->course_id,
             'classroom_id' => $request->classroom_id,
+            'max_date_upload' => $request->max_date_upload,
         ]);
 
-        return redirect()->route('teacher.task.index');
+        return redirect()->route('teacher.task.get_by_classroom', ['classroom' => $request->classroom_id]);
     }
 
     /**
@@ -90,9 +109,9 @@ class TaskController extends Controller
     {
         //
         $task = $this->item->find($id);
-        $students = Student::where('classroom_id', $task->classroom_id)->orderBy('name', 'asc')->get();
+        $students = Student::orderBy('name', 'asc')->where('classroom_id', $task->classroom_id)->orderBy('name', 'asc')->get();
 
-        return view('pages.task.show', ['students' => $students, 'task' => $task]);
+        return view('pages.teacher.task.show', ['students' => $students, 'task' => $task]);
     }
 
     /**

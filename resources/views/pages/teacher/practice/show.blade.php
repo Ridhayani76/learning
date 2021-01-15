@@ -9,11 +9,15 @@
                     <img src="{{asset('img/practice.svg')}}" alt="" class="hero-image">
                 </div>
                 <div class="col-md-8">
-                    <h6 class="text-muted mb-3">Wahana Praktik</h6>
+                    <h6 class="text-muted">{{$practice->skill->name}}</h6>
                     <h1>{{$practice->agency->name}}</h1>
-                    <h5 class="mb-5">{{$practice->skill->name}}</h5>
+                    <h5 class="mb-5">Periode ({{date('j M Y', strtotime($practice->start))}} - {{date('j M Y', strtotime($practice->end))}})</h5>
 
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Tambah Anggota</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <span class="d-flex align-items-center">
+                            <ion-icon name="add-outline" class="mr-1"></ion-icon> Tambah anggota
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -21,23 +25,38 @@
 
     <div class="container">
 
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('teacher.practice.index')}}">Wahana Praktik</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{$practice->agency->name}} periode {{date('j F Y', strtotime($practice->start))}} sampai {{date('j F Y', strtotime($practice->end))}}</li>
+            </ol>
+        </nav>
+
         <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Daftar Anggota
+                </h5>
+            </div>
             <div class="card-body" style="padding: 0px;">
                 <table class="table table-striped" style="margin: 0px;">
-                    <thead>
-                        <tr>
-                            <th>Kelas</th>
-                            <th>Anggota</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
                     <tbody>
-                        @foreach($practice->members as $member)
+                        @foreach($practice->members as $i => $member)
                             <tr>
-                                <td>{{$member->student->classroom->name}}</td>
-                                <td>{{$member->student->name}}</td>
+                                <td class="text-center" style="width: 60px;">
+                                    <img src="{{Avatar::create($i+1)->setDimension(50)->setFontSize(18)->toBase64()}}" />
+                                </td>
                                 <td>
-                                    <a href="">Hapus</a>
+                                    <h6>{{$member->student->name}}</h6>
+                                    <span>Kelas {{$member->student->classroom->name}}</span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
+                                        <span class="d-flex align-items-center">
+                                            <ion-icon name="trash-outline" class="mr-1"></ion-icon> Batalkan
+                                        </span>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -74,7 +93,7 @@
                         <div class="col-9">
                             <select name="student_id" id="student_id" class="form-control">
                                 @foreach(\App\Student::all() as $student)
-                                <option value="{{$student->id}}">{{$student->classroom->name}} - {{$student->name}}</option>
+                                <option value="{{$student->id}}">{{$student->classroom->name}}/{{$student->name}}</option>
                                 @endforeach
                             </select>
                         </div>

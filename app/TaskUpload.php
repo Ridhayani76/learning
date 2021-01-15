@@ -12,4 +12,8 @@ class TaskUpload extends Model
     public function task () {
         return $this->belongsTo(Task::class);
     }
+
+    public function assessment () {
+        return $this->hasOne(Assessment::class);
+    }
 }

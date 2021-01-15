@@ -10,8 +10,6 @@
                 <div class="col-md-8">
                     <h2>Welcome back {{Auth()->user()->teacher->name}}</h2>
                     <h5 class="mb-5">Have a nice day :)</h5>
-
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Tambah Anggota</a>
                 </div>
             </div>
         </div>
@@ -19,7 +17,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
 

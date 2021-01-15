@@ -12,4 +12,8 @@ class PracticeMember extends Model
     public function student () {
         return $this->belongsTo(Student::class);
     }
+
+    public function practice () {
+        return $this->belongsTo(Practice::class);
+    }
 }

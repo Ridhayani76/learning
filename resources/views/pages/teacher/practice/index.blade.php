@@ -12,16 +12,34 @@
                     <h1>Wahana Praktik</h1>
                     <p class="text-muted">Klik tombol dibawah untuk membuat wahana praktik</p>
 
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Buat Baru</a>
+                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <span class="d-flex align-items-center">
+                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Baru
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Wahana Praktik</li>
+            </ol>
+        </nav>
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
+
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            List Wahana Praktik
+                        </h5>
+                    </div>
 
                     <div class="card-body" style="padding: 0px;">
 
@@ -36,34 +54,39 @@
                         <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
                             <table class="table table-striped" style="margin-bottom: 0px;">
-                                <thead>
-                                <tr>
-                                    <th>Tempat Praktik</th>
-                                    <th>Kompetensi</th>
-                                    <th>Jumlah Anggota</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                                </thead>
                                 <tbody>
-                                @php
-                                    $i = 1;
-                                @endphp
 
                                 @foreach($practices as $practice)
                                     <tr>
-                                        <td style="vertical-align: middle">{{$practice->agency->name}}</td>
-                                        <td style="vertical-align: middle">{{$practice->skill->name}}</td>
-                                        <td style="vertical-align: middle">{{$practice->members->count()}}</td>
+                                        <td style="vertical-align: middle">
+                                            <h6>Tempat Praktik</h6>
+                                            {{$practice->agency->name}}
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <h6>Kompetensi</h6>
+                                            {{$practice->skill->name}}
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <h6>Jumlah Anggota</h6>
+                                            {{$practice->members->count()}}
+                                        </td>
                                         <td style="vertical-align: middle" class="text-center">
-                                            <a href="{{route('teacher.practice.show', ['practice' => $practice->id])}}" class="btn btn-outline-success btn-sm mr-2">Lihat</a>
-                                            <a href="" class="btn btn-outline-danger btn-sm mr-2">Hapus</a>
+                                            <a href="" class="btn btn-outline-danger btn-sm mr-2 line-0" style="padding: 10px">
+                                                <ion-icon name="trash-outline" size="small"></ion-icon>
+                                            </a>
+                                            <a href="{{route('teacher.practice.show', ['practice' => $practice->id])}}" class="btn btn-primary btn-sm">
+                                                <span class="d-flex align-items-center">
+                                                    Detail
+                                                    <ion-icon name="arrow-forward-outline" class="ml-1"></ion-icon>
+                                                </span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
 
                                 @if($practices->count() == 0)
                                     <tr>
-                                        <td colspan="6" class="text-center">Tidak ada kompetensi</td>
+                                        <td colspan="6" class="text-center">Tidak ada wahana praktik</td>
                                     </tr>
                                 @endif
 
@@ -127,7 +150,11 @@
 
                     <div class="row mt-4">
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Buat Wahana Praktik</button>
+                            <button class="btn btn-primary" type="submit">
+                                <span class="d-flex align-items-center">
+                                    <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Wahana Praktik
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>

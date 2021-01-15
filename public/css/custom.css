@@ -3,22 +3,27 @@
 }
 body {
     font-size: 14px;
+    background: #fff !important;
+}
+.jumbotron {
+    background: rgba(43,125,117, 0.2);
 }
 .hero-image {
-    width: 80%;
+    height: 100px;
+    width: 100%;
 }
-.btn {
-    border-radius: 8px;
-    font-weight: 500;
-}
-.btn-success {
-    border-color: transparent;
-    background: #40c3b5;
-}
-.btn-success:hover {
-    border-color: transparent;
-    background: #2B7D75;
-}
+/*.btn {*/
+/*    border-radius: 8px;*/
+/*    font-weight: 500;*/
+/*}*/
+/*.btn-success {*/
+/*    border-color: transparent;*/
+/*    background: #40c3b5;*/
+/*}*/
+/*.btn-success:hover {*/
+/*    border-color: transparent;*/
+/*    background: #2B7D75;*/
+/*}*/
 ion-icon {
     font-size: 24px;
 }
@@ -37,17 +42,43 @@ ion-icon {
 .card-header {
     background: #fff;
     border-bottom: 0px;
+    padding: 24px 20px;
+}
+.card-header:first-child {
+    border-top-left-radius: 16px !important;
+    border-top-right-radius: 16px !important;
 }
 .card-title {
     margin-bottom: 0px;
-    font-weight: bold;
+    font-weight: 500;
+}
+.card-title .text-primary {
+    font-size: 12px;
 }
 
 .table {
     border: 0px;
 }
 .table.table-striped tr td{
-    border: 0px;
+    /*border: 0px;*/
     background: #fff;
+    padding: 30px 22px;
+}
+.table.table-striped tr td h6 {
+    font-size: 14px;
+    font-weight: 500;
+}
+.table.table-striped tr td .value {
+    font-size: 16px;
 }
 
+.btn {
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    border-width: 2px;
+}
+.line-0 {
+    line-height: 0;
+}

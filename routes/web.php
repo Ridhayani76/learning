@@ -36,12 +36,12 @@ Route::get('/home', function () {
 Route::middleware('auth')->group(function () {
 
     // Administrator
-    Route::group(['prefix' => '/admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
+    Route::group(['prefix' => '/a', 'as' => 'admin.', 'middleware' => 'admin'], function () {
         Route::get('/', 'AdminController@dashboard')->name('dashboard');
     });
 
     // Teacher
-    Route::group(['prefix' => '/teacher', 'as' => 'teacher.', 'middleware' => 'teacher'], function () {
+    Route::group(['prefix' => '/t', 'as' => 'teacher.', 'middleware' => 'teacher'], function () {
         Route::get('/', 'TeacherController@dashboard')->name('dashboard');
 
         Route::get('/task/classroom/{classroom}', 'Teacher\TaskController@get_by_classroom')->name('task.get_by_classroom');
@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     });
 
     // Student
-    Route::group(['prefix' => '/student', 'as' => 'student.', 'middleware' => 'student'], function () {
+    Route::group(['prefix' => '/s', 'as' => 'student.', 'middleware' => 'student'], function () {
         Route::get('/', 'StudentController@dashboard')->name('dashboard');
 
         Route::resource('/task', 'Student\TaskController');

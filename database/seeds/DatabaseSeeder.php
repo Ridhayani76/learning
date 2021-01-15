@@ -46,25 +46,41 @@ class DatabaseSeeder extends Seeder
             'teacher_id' => $teacher->id,
         ]);
 
-        // Generate Classroom
-        $classroom = \App\Classroom::create([
-            'name' => 'Teknik Komputer dan Informatika',
-        ]);
+        $classrooms = ['A', 'B', 'C'];
 
-        // Generate Student
-        foreach (range(1, 20) as $item) {
-            $user = [
-                'username' => 'student' . $item,
-                'password' => bcrypt('student'),
-                'role' => 3
-            ];
+        $st = 1;
 
-            $user = \App\User::create($user);
-            $student = \App\Student::create([
-                'name' => $faker->name,
-                'user_id' => $user->id,
-                'classroom_id' => $classroom->id,
-            ]);
+        foreach ($classrooms as $key => $c) {
+
+            foreach (range(1, 5) as $item) {
+
+                // Generate Classroom
+                $classroom = \App\Classroom::create([
+                    'name' => $c . $item,
+                ]);
+
+                // Generate Student
+                foreach (range(1, 20) as $item) {
+                    $user = [
+                        'username' => 'student' . $st,
+                        'password' => bcrypt('student'),
+                        'role' => 3
+                    ];
+
+                    $user = \App\User::create($user);
+                    $student = \App\Student::create([
+                        'name' => $faker->name,
+                        'user_id' => $user->id,
+                        'classroom_id' => $classroom->id,
+                    ]);
+
+                    $st++;
+                }
+
+            }
+
         }
+
+
     }
 }
