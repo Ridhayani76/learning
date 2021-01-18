@@ -65,11 +65,20 @@
                                             </p>
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{route('teacher.task.show', ['task' => $task->id])}}" class="btn btn-outline-primary btn-sm">
+
+                                            @if($task->hasUploaded(Auth::user()->student->id))
+                                                <a href="#" onclick="upload(event, {{$task->id}}, '{{$task->course->name}}', '{{$task->title}}')" class="btn btn-link btn-sm">
                                                 <span class="d-flex align-items-center">
-                                                    Lihat <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
+                                                    <ion-icon name="eye-outline" class="mr-2"></ion-icon> Lihat Pengerjaan
+                                                </span>
+                                                </a>
+                                            @else
+                                            <a href="#" onclick="upload(event, {{$task->id}}, '{{$task->course->name}}', '{{$task->title}}')" class="btn btn-outline-primary btn-sm">
+                                                <span class="d-flex align-items-center">
+                                                    <ion-icon name="cloud-upload-outline" class="mr-2"></ion-icon> Upload Pengerjaan
                                                 </span>
                                             </a>
+                                            @endif
                                         </td>
                                     </tr>
 
@@ -105,7 +114,7 @@
                     <div class="form-group row align-items-center">
                         <div class="col-3 text-right">Tugas</div>
                         <div class="col-9">
-                            <input type="text" name="task_id" class="form-control" style="visibility: hidden; position:absolute;" id="task_id">
+                            <input type="text" name="task_id" class="form-control" style="visibility: hidden; position:absolute;" id="task-id">
                             <input type="text" class="form-control" disabled id="tugas">
                         </div>
                     </div>
@@ -132,4 +141,15 @@
             </div>
         </div>
     </form>
+@endsection
+
+@section('js')
+    <script>
+        function upload (e, id, course, title) {
+            e.preventDefault();
+            $('#exampleModal').modal('show');
+            $('#task-id').val(id);
+            $('#tugas').val(title + ' - ' + course);
+        }
+    </script>
 @endsection
