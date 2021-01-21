@@ -21,7 +21,7 @@
 
                     <a href="" class="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
-                            <ion-icon name="person-add-outline" class="mr-1"></ion-icon> Tambah anggota
+                            <ion-icon name="person-add-outline" class="mr-2"></ion-icon> Tambah anggota
                         </span>
                     </a>
                     <a href="" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
@@ -88,7 +88,7 @@
                                 <td class="text-center">
                                     <a href="" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
                                         <span class="d-flex align-items-center">
-                                            <ion-icon name="person-remove-outline" class="mr-1"></ion-icon> Batalkan
+                                            <ion-icon name="person-remove-outline" class="mr-2"></ion-icon> Batalkan
                                         </span>
                                     </a>
                                 </td>

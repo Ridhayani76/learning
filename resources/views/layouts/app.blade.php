@@ -41,16 +41,28 @@
                     @if(!Auth::guest())
                         @if(Auth::user()->role == "teacher")
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('teacher.task.index') }}">{{ __('Penugasan') }}</a>
+                                <a class="nav-link d-flex align-items-center" href="{{ route('teacher.task.index') }}">
+                                    <ion-icon name="folder-open-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Penugasan') }}
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('teacher.practice.index') }}">{{ __('Wahana Praktik') }}</a>
+                                <a class="nav-link d-flex align-items-center" href="{{ route('teacher.practice.index') }}">
+                                    <ion-icon name="git-network-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Wahana Praktik') }}
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('teacher.agency.index') }}">{{ __('Tempat Praktik') }}</a>
+                                <a class="nav-link d-flex aign-items-center" href="{{ route('teacher.agency.index') }}">
+                                    <ion-icon name="navigate-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Tempat Praktik') }}
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('teacher.skill.index') }}">{{ __('Kompetensi') }}</a>
+                                <a class="nav-link d-flex align-items-center" href="{{ route('teacher.skill.index') }}">
+                                    <ion-icon name="flask-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Kompetensi') }}
+                                </a>
                             </li>
                         @elseif(Auth::user()->role == "student")
                             <li class="nav-item">

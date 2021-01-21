@@ -9,15 +9,23 @@
                     <img src="{{asset('img/task.svg')}}" alt="" class="hero-image">
                 </div>
                 <div class="col-md-8">
-                    <h6>{{ $task->course->name }}</h6>
-                    <h1>{{ $task->title }} <small class="text-muted">- Kelas {{ $task->classroom->name }}</small></h1>
+                    <h6 class="d-flex align-items-center">
+                        <ion-icon name="book-outline" style="font-size: 18px;" class="mr-2"></ion-icon>
+                        {{ $task->course->name }}
+                    </h6>
+                    <h1>
+                        {{ $task->title }}
+                        <small class="text-muted">
+                            - Kelas {{ $task->classroom->name }}
+                        </small>
+                    </h1>
                     <p class="text-muted">Klik tombol dibawah untuk mendownload form/dokumen tugas.</p>
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <a href="" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
                             <ion-icon name="document-outline" class="mr-1"></ion-icon> Lihat form tugas
                         </span>
                     </a>
-                    <a href="" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+                    <a href="" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
                             <ion-icon name="create-outline" class="mr-1"></ion-icon> Edit Tugas
                         </span>
@@ -44,9 +52,34 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title">
-                            List status pengumpulan tugas
-                        </h5>
+                        <div class="">
+                            <h5 class="card-title mb-1">
+                                List status pengumpulan tugas
+                            </h5>
+                            <span class="text-muted">2 dinilai, 1 mengumpulkan, 20 belum mengumpulkan.</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="form-group mr-2" style="margin: 0px;">
+                                <small class="text-muted">Urutkan</small>
+                                <select name="" id="" class="form-control" style="width: 200px;">
+                                    <option value="">Nama (asc)</option>
+                                    <option value="">Nama (desc)</option>
+                                    <option value="">Nilai Tertingi</option>
+                                    <option value="">Nilai Terendah</option>
+                                    <option value="">Paling Awal Mengumpulkan</option>
+                                    <option value="">Paling Akhir Mengumpulkan</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin: 0px;">
+                                <small class="text-muted">Filter</small>
+                                <select name="" id="" class="form-control" style="width: 200px;">
+                                    <option value="">Semua</option>
+                                    <option value="">Belum mengumpulkan</option>
+                                    <option value="">Mengumpulkan</option>
+                                    <option value="">Telah dinilai</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-body" style="padding: 0px;">
@@ -60,25 +93,34 @@
                                     </td>
                                     <td>
                                         <h6 class="key">{{$student->name}}</h6>
-                                        <span class="value">{{$student->nim ? $student->nim : '-'}}</span>
+                                        <span class="text-muted" style="letter-spacing: 1.2px; font-weight: bold;">{{$student->nim ? $student->nim : '-'}}</span>
                                     </td>
                                     <td>
                                         <h6 class="key">Status</h6>
                                         @if($task->hasUploaded($student->id))
-                                            <span class="badge badge-{{isset($task->hasUploaded($student->id)->assessment) ? 'success' : 'warning'}}">
-                                                {{isset($task->hasUploaded($student->id)->assessment) ? 'Telah Dinilai' : 'Mengumpulkan'}}
+                                            <span class="badge badge-{{isset($task->hasUploaded($student->id)->assessment) ? 'primary' : 'success'}}">
+                                                <span class="d-flex align-items-center">
+                                                    <ion-icon name="{{isset($task->hasUploaded($student->id)->assessment) ? 'create-outline' : 'checkmark-circle-outline'}}" class="mr-1" style="font-size: 12px;"></ion-icon>
+                                                    {{isset($task->hasUploaded($student->id)->assessment) ? 'Telah Dinilai' : 'Mengumpulkan'}}
+                                                </span>
                                             </span>
                                         @else
                                             <span class="badge badge-secondary">
-                                                Belum Mengumpulkan
+                                                <span class="d-flex align-items-center">
+                                                    <ion-icon name="alert-circle-outline" class="mr-1" style="font-size: 12px;"></ion-icon>
+                                                    Belum Mengumpulkan
+                                                </span>
                                             </span>
                                         @endif
                                     </td>
                                     <td>
                                         <h6>Nilai</h6>
                                         @if(isset($task->hasUploaded($student->id)->assessment))
-                                            <span>
-                                                {{$task->hasUploaded($student->id)->assessment->score}}
+                                            <span class="text-muted">
+                                                <span style="letter-spacing: 1.2px; font-weight: bold;">
+                                                    {{$task->hasUploaded($student->id)->assessment->score}}
+                                                </span>
+                                                <small>({{$task->hasUploaded($student->id)->assessment->scoreTitle}})</small>
                                             </span>
                                         @else
                                             -
@@ -151,7 +193,7 @@
                         <tr>
                             <td>
                                 <h6 id="student-name">Ahmad Irfan Maulana</h6>
-                                <span id="student-nis">298239</span>
+                                <span style="letter-spacing: 1.2px; font-weight: bold;" id="student-nis">298239</span>
                             </td>
                             <td>
                                 <h6 id="task-title">HTML</h6>

@@ -12,8 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
         $faker = Faker::create('id_ID');
-        // $this->call(UsersTableSeeder::class);
+        // $this->call(UsersTableSeeder::class)
+
+        \App\Student::all()->each(function ($student) use ($faker) {
+            $student->update([
+                'nim' => $faker->numerify('##########'),
+            ]);
+        });
+
+        exit;
 
         // Generate Admin
         $admin = [
