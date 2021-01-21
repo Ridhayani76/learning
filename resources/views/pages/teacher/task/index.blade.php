@@ -8,7 +8,10 @@
                     <img src="{{asset('img/task.svg')}}" alt="" class="hero-image">
                 </div>
                 <div class="col-md-8">
-                    <h6>{{$dateDisplay}}.</h6>
+                    <h6 class="d-flex align-items-center">
+                        <ion-icon name="calendar-outline" style="font-size: 18px;" class="mr-2"></ion-icon>
+                        {{$dateDisplay}}
+                    </h6>
                     <h1>Penugasan</h1>
                     <p class="text-muted">Klik detail untuk melihat list tugas dari kelas yang dipilih.</p>
 
@@ -21,8 +24,16 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Penugasan ({{date('j F Y', strtotime($date))}})</li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.dashboard')}}" class="d-flex align-items-center text-primary">
+                        <ion-icon name="home-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
+                    <ion-icon name="folder-open-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                    Penugasan ({{date('j F Y', strtotime($date))}})
+                </li>
             </ol>
         </nav>
 
@@ -32,7 +43,17 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h5 class="card-title mr-3">
-                            <span class="font-weight-bold">{{date('F', strtotime($date))}} <span class="text-muted">{{date('j D, Y', strtotime($date))}}</span></span>
+                            <span>
+                                @if(date('Y-m-d') == $date)
+                                    Hari ini
+                                @elseif(date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d')))) == $date)
+                                    Kemarin
+                                @elseif(date('Y-m-d', strtotime('+1 days', strtotime(date('Y-m-d')))) == $date)
+                                    Besok
+                                @else
+                                {{date('F', strtotime($date))}} <span class="text-muted">{{date('j D, Y', strtotime($date))}}</span>
+                                @endif
+                            </span>
                         </h5>
 
                         <div>
@@ -52,7 +73,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5 class="card-title">
-                            Daftar Tugas Perkelas <small class="text-primary">({{$amount_of_tasks}} Tugas hari ini)</small>
+                            Daftar Tugas Perkelas <small class="text-primary">({{$amount_of_tasks}} Tugas)</small>
                         </h5>
                     </div>
 
@@ -74,16 +95,23 @@
                                 @foreach($classrooms as $classroom)
                                     <tr>
                                         <td style="vertical-align: middle">
-                                            <h6>Kelas</h6>
-                                            <span class="value">{{$classroom->name}}</span>
+                                            <h6>Tugas</h6>
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="people-outline" class="mr-2" style="font-size: 14px"></ion-icon> Kelas {{$classroom->name}}
+                                            </span>
                                         </td>
                                         <td>
-                                            <h6>Jumlah Tugas</h6>
-                                            <span class="value">{{$classroom->tasks->count()}}</span>
+                                            <h6>Jumlah</h6>
+                                            <span class="d-flex align-items-center text-muted">
+                                                <ion-icon name="folder-open-outline" class="mr-2" style="font-size: 14px"></ion-icon> {{$classroom->tasks->count()}} tugas
+                                            </span>
                                         </td>
                                         <td style="vertical-align: middle" class="text-center">
-                                            <a href="{{route('teacher.task.get_by_classroom', ['classroom' => $classroom->id, 'date' => $date])}}" class="btn btn-primary">
-                                                Detail
+                                            <a href="{{route('teacher.task.get_by_classroom', ['classroom' => $classroom->id, 'date' => $date])}}" class="btn btn-outline-primary">
+                                                <span class="d-flex align-items-center">
+                                                    Detail
+                                                    <ion-icon name="arrow-forward-circle-outline" class="ml-2"></ion-icon>
+                                                </span>
                                             </a>
                                         </td>
                                     </tr>

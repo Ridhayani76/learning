@@ -8,12 +8,15 @@
                     <img src="{{asset('img/task.svg')}}" alt="" class="hero-image">
                 </div>
                 <div class="col-md-8">
-                    <h6>Tugas {{date('j F Y', strtotime($date))}}</h6>
+                    <h6 class="d-flex align-items-center">
+                        <ion-icon name="calendar-outline" style="font-size: 18px;" class="mr-2"></ion-icon>
+                         {{date('j F Y', strtotime($date))}}
+                    </h6>
                     <h1>Kelas {{$classroom->name}}</h1>
                     <p class="text-muted">Klik tombol dibawah untuk membuat tugas baru.</p>
                     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
-                            <ion-icon name="add-outline" class="mr-1"></ion-icon> Buat Tugas
+                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Tugas
                         </span>
                     </a>
                 </div>
@@ -59,16 +62,22 @@
                                     <tr>
                                         <td>
                                             <h6>{{$task->title}}</h6>
-                                            <p class="text-muted">{{$task->course->name}}</p>
+                                            <span class="d-flex align-items-center text-muted">
+                                                <ion-icon name="book-outline" class="mr-2" style="font-size: 14px"></ion-icon> {{$task->course->name}}
+                                            </span>
                                         </td>
                                         <td>
                                             <h6>Batas pengumpulan</h6>
-                                            <p class="text-muted">{{$task->max_date_upload ? date('j F Y', strtotime($task->max_date_upload)) : '-'}}</p>
+                                            <span class="d-flex align-items-center text-muted">
+                                                <ion-icon name="calendar-outline" class="mr-2" style="font-size: 14px"></ion-icon> {{$task->max_date_upload ? date('j F Y', strtotime($task->max_date_upload)) : '-'}}
+                                            </span>
                                         </td>
                                         <td>
-                                            <h6>Dokumen Tugas</h6>
+                                            <h6>Form Tugas</h6>
                                             <p class="text-muted">
-                                                <a href="{{$task->file}}" class="line-0 d-flex align-items-center"><ion-icon name="download-outline" size="small" class="mr-1"></ion-icon> Download</a>
+                                                <a href="{{$task->file}}" class="line-0 d-flex align-items-center">
+                                                    <ion-icon name="document-outline" size="small" class="mr-1"></ion-icon> Download Form
+                                                </a>
                                             </p>
                                         </td>
                                         <td class="text-center">

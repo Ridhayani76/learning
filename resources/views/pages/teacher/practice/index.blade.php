@@ -26,8 +26,16 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Wahana Praktik</li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.dashboard')}}" class="d-flex align-items-center">
+                        <ion-icon name="home-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
+                    <ion-icon name="git-network-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                    Wahana Praktik
+                </li>
             </ol>
         </nav>
 
@@ -60,21 +68,37 @@
                                     <tr>
                                         <td style="vertical-align: middle">
                                             <h6>Tempat Praktik</h6>
-                                            {{$practice->agency->name}}
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="location-outline" class="mr-1" style="font-size: 14px;"></ion-icon>
+                                                {{$practice->agency->name}}
+                                            </span>
                                         </td>
                                         <td style="vertical-align: middle">
                                             <h6>Kompetensi</h6>
-                                            {{$practice->skill->name}}
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="flask-outline" class="mr-1" style="font-size: 14px;"></ion-icon>
+                                                {{$practice->skill->name}}
+                                            </span>
                                         </td>
                                         <td style="vertical-align: middle">
-                                            <h6>Jumlah Anggota</h6>
-                                            {{$practice->members->count()}}
+                                            <h6>Jumlah</h6>
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="people-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
+                                                {{$practice->members->count()}} anggota
+                                            </span>
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            <h6>Periode</h6>
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="calendar-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
+                                                {{$practice->periode}}
+                                            </span>
                                         </td>
                                         <td style="vertical-align: middle" class="text-center">
                                             <a href="" class="btn btn-outline-danger btn-sm mr-2 line-0" style="padding: 10px">
                                                 <ion-icon name="trash-outline" size="small"></ion-icon>
                                             </a>
-                                            <a href="{{route('teacher.practice.show', ['practice' => $practice->id])}}" class="btn btn-primary btn-sm">
+                                            <a href="{{route('teacher.practice.show', ['practice' => $practice->id])}}" class="btn btn-outline-primary btn-sm">
                                                 <span class="d-flex align-items-center">
                                                     Detail
                                                     <ion-icon name="arrow-forward-outline" class="ml-1"></ion-icon>

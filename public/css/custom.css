@@ -3,10 +3,18 @@
 }
 body {
     font-size: 14px;
-    background: #fff !important;
+    background: #f7f9f9;
 }
 .jumbotron {
-    background: rgba(43,125,117, 0.2);
+    /*background: rgba(43,125,117, 0.2);*/
+    background: #f0f3f0;
+    border-radius: 0px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    padding-bottom: 125px;
+}
+.jumbotron + .container {
+    margin-top: -125px;
 }
 .hero-image {
     height: 100px;
@@ -38,6 +46,7 @@ ion-icon {
 /*card*/
 .card {
     background: #fff;
+    border-radius: 8px;
 }
 .card-header {
     background: #fff;

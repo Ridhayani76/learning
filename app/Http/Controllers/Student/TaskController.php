@@ -21,7 +21,7 @@ class TaskController extends Controller
 
         $classroom = auth()->user()->student->classroom_id;
 
-        $items = $this->item->where('classroom_id', $classroom)->get();
+        $items = $this->item->orderBy('created_at', 'desc')->where('classroom_id', $classroom)->get();
 
         return view('pages.student.task.index', compact('items', 'date'));
     }

@@ -9,13 +9,24 @@
                     <img src="{{asset('img/practice.svg')}}" alt="" class="hero-image">
                 </div>
                 <div class="col-md-8">
-                    <h6 class="text-muted">{{$practice->skill->name}}</h6>
-                    <h1>{{$practice->agency->name}}</h1>
-                    <h5 class="mb-5">Periode ({{date('j M Y', strtotime($practice->start))}} - {{date('j M Y', strtotime($practice->end))}})</h5>
+                    <h5 class="text-muted d-flex align-items-center">
+                        <ion-icon name="navigate-circle-outline" style="font-size: 22px;" class="mr-2"></ion-icon>
+                        {{$practice->agency->name}}
+                    </h5>
+                    <h1 class="mb-3">Praktik {{$practice->skill->name}}</h1>
+                    <h6 class="mb-5 d-flex align-items-center">
+                        <ion-icon name="calendar-outline" style="font-size: 18px;" class="mr-2"></ion-icon>
+                        Periode ({{date('j M Y', strtotime($practice->start))}} - {{date('j M Y', strtotime($practice->end))}})
+                    </h6>
 
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <a href="" class="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
-                            <ion-icon name="add-outline" class="mr-1"></ion-icon> Tambah anggota
+                            <ion-icon name="person-add-outline" class="mr-1"></ion-icon> Tambah anggota
+                        </span>
+                    </a>
+                    <a href="" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+                        <span class="d-flex align-items-center">
+                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Edit
                         </span>
                     </a>
                 </div>
@@ -27,9 +38,23 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{route('teacher.practice.index')}}">Wahana Praktik</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{$practice->agency->name}} periode {{date('j F Y', strtotime($practice->start))}} sampai {{date('j F Y', strtotime($practice->end))}}</li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.dashboard')}}" class="d-flex align-items-center text-primary">
+                        <ion-icon name="home-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.practice.index')}}" class="text-primary d-flex align-items-center">
+                        <ion-icon name="git-network-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Wahana Praktik
+                    </a>
+                </li>
+                <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
+                    <ion-icon name="calendar-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                    {{$practice->agency->name}} periode {{$practice->periode}}
+                </li>
+
             </ol>
         </nav>
 
@@ -49,12 +74,21 @@
                                 </td>
                                 <td>
                                     <h6>{{$member->student->name}}</h6>
-                                    <span>Kelas {{$member->student->classroom->name}}</span>
+                                    <span class="d-flex align-items-center text-muted">
+                                        <ion-icon name="people-outline" class="mr-1" style="font-size: 14px"></ion-icon> Kelas {{$member->student->classroom->name}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <h6>Status</h6>
+                                    <span class="text-muted d-flex align-items-center">
+                                        <ion-icon name="hourglass-outline" class="mr-1" style="font-size: 14px;"></ion-icon>
+                                        Semester {{$member->semester}}
+                                    </span>
                                 </td>
                                 <td class="text-center">
                                     <a href="" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
                                         <span class="d-flex align-items-center">
-                                            <ion-icon name="trash-outline" class="mr-1"></ion-icon> Batalkan
+                                            <ion-icon name="person-remove-outline" class="mr-1"></ion-icon> Batalkan
                                         </span>
                                     </a>
                                 </td>
@@ -101,7 +135,7 @@
                     <div class="form-group row align-items-center">
                         <div class="col-3 text-right">Semester</div>
                         <div class="col-9">
-                            <select name="semester" id="semester" class="form-control">
+                            <select name="semester" id="semester" class="form-control" style="width: 80px">
                                 @foreach(range(1, 8) as $i)
                                     <option value="{{$i}}">{{$i}}</option>
                                 @endforeach
@@ -111,7 +145,12 @@
                     <div class="row mt-3">
                         <div class="col-3"></div>
                         <div class="col-9">
-                            <button class="btn btn-success" type="submit">Tambah Anggota</button>
+                            <button class="btn btn-primary" type="submit">
+                                <span class="d-flex align-items-center">
+                                    <ion-icon name="add-outline" class="mr-1"></ion-icon>
+                                    Tambah Anggota
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>

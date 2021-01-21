@@ -23,6 +23,17 @@ class Practice extends Model
     }
 
     public function getPeriodeAttribute () {
+
+        if (date('Y', strtotime($this->start)) == date('Y', strtotime($this->end))) {
+
+            if (date('m', strtotime($this->start)) == date('m', strtotime($this->end))) {
+               return date('j', strtotime($this->start)) . " - " . date('j', strtotime($this->end)) . " " . date('M', strtotime($this->start)) . " " . date('Y', strtotime($this->start));
+            }
+
+            return date('j M', strtotime($this->start)) . " - " . date('j M', strtotime($this->end)) . " " . date('Y', strtotime($this->start));
+        }
+
         return date('j M Y', strtotime($this->start)) . " - " . date('j M Y', strtotime($this->end));
      }
+
 }
