@@ -10,13 +10,13 @@
                 <div class="col-md-8">
                     <h6 class="d-flex align-items-center">
                         <ion-icon name="calendar-outline" style="font-size: 18px;" class="mr-2"></ion-icon>
-                         {{date('j F Y', strtotime($date))}}
+                         {{date('F j D, Y', strtotime($date))}}
                     </h6>
                     <h1>Kelas {{$classroom->name}}</h1>
                     <p class="text-muted">Klik tombol dibawah untuk membuat tugas baru.</p>
                     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
-                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Tugas
+                            <ion-icon name="create-outline" class="mr-2"></ion-icon> Buat Tugas
                         </span>
                     </a>
                 </div>
@@ -28,9 +28,36 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{route('teacher.task.index')}}">Penugasan ({{date('j F Y', strtotime($date))}})</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Kelas {{$classroom->name}}</li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.dashboard')}}" class="d-flex align-items-center text-primary">
+                        <ion-icon name="home-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item d-flex align-items-center">
+                    <a href="{{route('teacher.task.index')}}" class="d-flex align-items-center">
+                        <ion-icon name="folder-open-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Penugasan
+                    </a>
+                </li>
+                <li class="breadcrumb-item d-flex align-items-center">
+                    <a href="{{route('teacher.task.index', ['date' => $date])}}" class="d-flex align-items-center">
+                        <ion-icon name="calendar-clear-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        @if(date('Y-m-d') == $date)
+                            Hari ini
+                        @elseif(date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d')))) == $date)
+                            Kemarin
+                        @elseif(date('Y-m-d', strtotime('+1 days', strtotime(date('Y-m-d')))) == $date)
+                            Besok
+                        @else
+                            {{date('j F Y', strtotime($date))}}
+                        @endif
+                    </a>
+                </li>
+                <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
+                    <ion-icon name="layers-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                    Kelas {{$classroom->name}}
+                </li>
             </ol>
         </nav>
 
@@ -38,9 +65,24 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title">
-                            Daftar Tugas Kelas {{$classroom->name}}
-                        </h5>
+                        <div>
+                            <h5 class="card-title mb-1">
+                                Daftar Tugas Kelas {{$classroom->name}}
+                            </h5>
+                            <span class="text-muted">
+                                Ada <span class="font-weight-bold">{{$items->count()}} tugas</span> pada
+                                @if(date('Y-m-d') == $date)
+                                    Hari ini
+                                @elseif(date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d')))) == $date)
+                                    Kemarin
+                                @elseif(date('Y-m-d', strtotime('+1 days', strtotime(date('Y-m-d')))) == $date)
+                                    Besok
+                                @else
+                                    {{date('j F Y', strtotime($date))}}
+                                @endif
+                                .
+                            </span>
+                        </div>
                     </div>
 
                     <div class="card-body" style="padding: 0px">
@@ -93,7 +135,19 @@
 
                                 @if($items->count() == 0)
                                     <tr>
-                                        <td colspan="6" class="text-center">Tidak ada tugas</td>
+                                        <td colspan="6" class="text-center">
+                                            Tidak ada tugas di kelas {{$classroom->name}} pada
+                                            @if(date('Y-m-d') == $date)
+                                                Hari ini
+                                            @elseif(date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d')))) == $date)
+                                                Kemarin
+                                            @elseif(date('Y-m-d', strtotime('+1 days', strtotime(date('Y-m-d')))) == $date)
+                                                Besok
+                                            @else
+                                                {{date('j F Y', strtotime($date))}}
+                                            @endif
+                                            .
+                                        </td>
                                     </tr>
                                 @endif
 

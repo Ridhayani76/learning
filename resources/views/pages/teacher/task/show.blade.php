@@ -41,10 +41,28 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{route('teacher.task.index')}}">Penugasan ({{date('j F Y', strtotime($task->created_at))}})</a></li>
-                <li class="breadcrumb-item"><a href="{{route('teacher.task.get_by_classroom', ['classroom' => $task->classroom_id, 'date' => date('Y-m-d', strtotime($task->created_at))])}}">Kelas {{$task->classroom->name}}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.dashboard')}}" class="d-flex align-items-center text-primary">
+                        <ion-icon name="home-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.task.index')}}" class="d-flex align-items-center text-primary">
+                        <ion-icon name="folder-open-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Penugasan ({{date('j F Y', strtotime($task->created_at))}})
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.task.get_by_classroom', ['classroom' => $task->classroom_id, 'date' => date('Y-m-d', strtotime($task->created_at))])}}" class="d-flex align-items-center">
+                        <ion-icon name="layers-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Kelas {{$task->classroom->name}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
+                    <ion-icon name="scan-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                    Detail
+                </li>
             </ol>
         </nav>
 
@@ -56,10 +74,26 @@
                             <h5 class="card-title mb-1">
                                 List status pengumpulan tugas
                             </h5>
-                            <span class="text-muted">2 dinilai, 1 mengumpulkan, 20 belum mengumpulkan.</span>
+                            <span class="text-muted d-flex align-items-center">
+                                <span class="text-primary d-flex align-items-center">
+                                    <span class="font-weight-bold mr-1">{{$task->countAssessed()}}</span> Dinilai
+                                </span>
+
+                                <ion-icon name="ellipse" class="mx-2" style="font-size: 6px;"></ion-icon>
+
+                                <span class="text-success d-flex align-items-center">
+                                    <span class="font-weight-bold mr-1">{{$task->countUpload()}}</span> Belum dinilai
+                                </span>
+
+                                <ion-icon name="ellipse" class="mx-2" style="font-size: 6px;"></ion-icon>
+
+                                <span class="text-info d-flex align-items-center">
+                                    <span class="font-weight-bold mr-1">{{$task->countNotupload()}}</span> Belum mengumpulkan.
+                                </span>
+                            </span>
                         </div>
                         <div class="d-flex align-items-center">
-                            <div class="form-group mr-2" style="margin: 0px;">
+                            <div class="form-group mr-3" style="margin: 0px;">
                                 <small class="text-muted">Urutkan</small>
                                 <select name="" id="" class="form-control" style="width: 200px;">
                                     <option value="">Nama (asc)</option>
@@ -82,18 +116,33 @@
                         </div>
                     </div>
 
+                    <div class="card-body" style="border-top: 1px solid #dee2e6;">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" data-toggle="bottom" data-placement="right" title="Telah dinilai" role="progressbar" style="width: {{$task->countAssessed()/$task->classroom->students->count() * 100}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                                {{$task->countAssessed()/$task->classroom->students->count() * 100}}%
+                            </div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" data-toggle="bottom" data-placement="bottom" title="Belum dinilai" role="progressbar" style="width: {{$task->countUpload()/$task->classroom->students->count() * 100}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                {{$task->countUpload()/$task->classroom->students->count() * 100}}%
+                            </div>
+                            <div class="progress-bar bg-info" role="progressbar" data-toggle="tooltip" data-placement="bottom" title="Belum mengumpulkan" style="width: {{$task->countNotupload()/$task->classroom->students->count() * 100}}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                {{$task->countNotupload()/$task->classroom->students->count() * 100}}%
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card-body" style="padding: 0px;">
 
                         <table class="table table-striped">
                             <tbody>
                             @foreach($students as $i => $student)
                                 <tr>
-                                    <td class="text-center">
-                                        <img src="{{Avatar::create($student->name)->setDimension(50)->setFontSize(18)->toBase64()}}" />
+                                    <td class="text-center" style="width: 80px;">
+{{--                                        <img src="{{Avatar::create($student->name)->setDimension(50)->setFontSize(18)->toBase64()}}" />--}}
+                                        <img src="https://randomuser.me/api/portraits/men/{{$i+1}}.jpg" width="50px" height="50px" style="border-radius: 50%;">
                                     </td>
                                     <td>
                                         <h6 class="key">{{$student->name}}</h6>
-                                        <span class="text-muted" style="letter-spacing: 1.2px; font-weight: bold;">{{$student->nim ? $student->nim : '-'}}</span>
+                                        <span class="text-info" style="letter-spacing: 1.2px; font-weight: bold;">{{$student->nim ? $student->nim : '-'}}</span>
                                     </td>
                                     <td>
                                         <h6 class="key">Status</h6>
@@ -105,7 +154,7 @@
                                                 </span>
                                             </span>
                                         @else
-                                            <span class="badge badge-secondary">
+                                            <span class="badge badge-info">
                                                 <span class="d-flex align-items-center">
                                                     <ion-icon name="alert-circle-outline" class="mr-1" style="font-size: 12px;"></ion-icon>
                                                     Belum Mengumpulkan
@@ -114,33 +163,29 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <h6>Nilai</h6>
                                         @if(isset($task->hasUploaded($student->id)->assessment))
-                                            <span class="text-muted">
+                                            <h6>Nilai</h6>
+                                            <span class="text-primary">
                                                 <span style="letter-spacing: 1.2px; font-weight: bold;">
                                                     {{$task->hasUploaded($student->id)->assessment->score}}
                                                 </span>
                                                 <small>({{$task->hasUploaded($student->id)->assessment->scoreTitle}})</small>
                                             </span>
-                                        @else
-                                            -
                                         @endif
                                     </td>
                                     <td>
-                                        <h6 class="key">Submit Pada</h6>
-                                        <span class="text-muted" style="font-size: 12px;">
-                                            @if($task->hasUploaded($student->id))
-                                                {{$task->hasUploaded($student->id)->created_at->diffForHumans()}}
-                                            @else
-                                                -
-                                            @endif
-                                        </span>
+                                        @if($task->hasUploaded($student->id))
+                                            <h6 class="key">Tanggal submit</h6>
+                                            <span class="text-muted" style="font-size: 12px;">
+                                               {{$task->hasUploaded($student->id)->created_at->diffForHumans()}}
+                                            </span>
+                                        @endif
                                     </td>
                                     <td class="">
                                         @if($task->hasUploaded($student->id))
-                                            <a href="{{url(Storage::url($task->hasUploaded($student->id)->file))}}" title="Lihat submit tugas" class="btn btn-primary mr-2" style="padding: 10px;">
+                                            <a href="{{url(Storage::url($task->hasUploaded($student->id)->file))}}" data-toggle="tooltip" title="Lihat hasil pengerjaan" data-placement="top" class="btn btn-primary mr-2" style="padding: 10px;">
                                                 <span class="d-flex align-items-center">
-                                                    <ion-icon name="document-text-outline"></ion-icon>
+                                                    <ion-icon name="open-outline"></ion-icon>
                                                 </span>
                                             </a>
                                             <a href="#" class="btn btn-outline-primary" onclick="assess(event, '{{$task->title}}', '{{$task->course->name}}', '{{$student->name}}', '{{$student->nim}}', {{$task->hasUploaded($student->id)->id}}, {{isset($task->hasUploaded($student->id)->assessment) ? $task->hasUploaded($student->id)->assessment->score : '0'}})">
@@ -179,21 +224,23 @@
         @csrf
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nilai</h5>
+                <div class="modal-header" style="border-bottom: 0px;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="margin-bottom: 0px;">Input Nilai</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="padding: 0px;">
 
                     <input type="hidden" name="task_upload_id" id="task-upload-id">
 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" style="margin: 0px;">
                         <tr>
                             <td>
                                 <h6 id="student-name">Ahmad Irfan Maulana</h6>
-                                <span style="letter-spacing: 1.2px; font-weight: bold;" id="student-nis">298239</span>
+                                <span class="text-info" style="letter-spacing: 1.2px; font-weight: bold;" id="student-nis">298239</span>
                             </td>
                             <td>
                                 <h6 id="task-title">HTML</h6>
@@ -201,19 +248,29 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <a href="" title="Lihat submit tugas" class="btn btn-outline-primary">
-                                    <span class="d-flex align-items-center">
-                                        <ion-icon name="document-text-outline" class="mr-2"></ion-icon> Lihat tugas
-                                    </span>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="" title="Lihat submit tugas" class="btn btn-outline-primary btn-block">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <ion-icon name="document-text-outline" class="mr-2"></ion-icon> Lihat Tugas
+                                    </div>
                                 </a>
+                            </td>
+                            <td>
+                                <h6>Catatan</h6>
+                                <div>-</div>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <h6>Nilai</h6>
-                                <input type="number" id="task-score" name="score" max="100" min="0" class="mb-3 form-control" placeholder="0-100">
-                                <button class="btn btn-primary" type="submit">Update Nilai</button>
+                                <input type="number" id="task-score" name="score" max="100" min="0" class="mb-4 form-control" placeholder="0-100">
+                                <button class="btn btn-primary" type="submit">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <ion-icon name="create-outline" class="mr-2"></ion-icon> Update nilai
+                                    </div>
+                                </button>
                             </td>
                         </tr>
                     </table>

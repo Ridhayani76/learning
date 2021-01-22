@@ -38,6 +38,13 @@ Route::middleware('auth')->group(function () {
     // Administrator
     Route::group(['prefix' => '/a', 'as' => 'admin.', 'middleware' => 'admin'], function () {
         Route::get('/', 'AdminController@dashboard')->name('dashboard');
+
+        Route::resource('/classroom', 'ClassroomController');
+        Route::resource('/classroom/{classroom}/student', 'StudentController');
+        Route::resource('/teacher', 'TeacherController');
+        Route::resource('/course', 'CourseController');
+        Route::resource('/agency', 'AgencyController');
+        Route::resource('/skill', 'SkillController');
     });
 
     // Teacher

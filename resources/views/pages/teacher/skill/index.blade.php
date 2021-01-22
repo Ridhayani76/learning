@@ -24,8 +24,16 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Kompetensi</li>
+                <li class="breadcrumb-item">
+                    <a href="{{route('teacher.dashboard')}}" class="d-flex align-items-center">
+                        <ion-icon name="home-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
+                    <ion-icon name="flask-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                    Kompetensi
+                </li>
             </ol>
         </nav>
 
@@ -33,7 +41,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title">Daftar Kompetensi</h5>
+                        <div>
+                            <h5 class="card-title mb-1">Daftar Kompetensi</h5>
+                            <span class="text-muted" style="font-size: 12px;">Ada {{$skills->count()}} kompetensi terdaftar.</span>
+                        </div>
                     </div>
 
                     <div class="card-body" style="padding: 0px;">
@@ -54,11 +65,22 @@
                                     <tr>
                                         <td style="vertical-align: middle">
                                             <h6>Kompetensi</h6>
-                                            <span>{{$skill->name}}</span>
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="flask-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
+                                                {{$skill->name}}
+                                            </span>
                                         </td>
                                         <td style="vertical-align: middle" class="text-center">
-                                            <a href="" class="btn btn-outline-danger btn-sm mr-2 line-0" style="padding: 10px">
-                                                <ion-icon name="trash-outline" size="small"></ion-icon>
+                                            <a href="" class="btn btn-outline-danger mr-2" data-toggle="tooltip" title="Hapus" style="padding: 10px;">
+                                                <span class="d-flex align-items-center">
+                                                    <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
+                                                </span>
+                                            </a>
+                                            <a href="" class="btn btn-outline-primary">
+                                                <span class="d-flex align-items-center">
+                                                    <ion-icon name="create-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                                    Edit
+                                                </span>
                                             </a>
                                         </td>
                                     </tr>

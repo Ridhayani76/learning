@@ -34,4 +34,28 @@ class Task extends Model
         }
     }
 
+    public function countUpload () {
+        $self = $this;
+
+        return $this->classroom->students->filter(function ($student) use ($self) {
+            return $self->hasUploaded($student->id) && !isset($self->hasUploaded($student->id)->assessment);
+        })->count();
+    }
+
+    public function countAssessed () {
+        $self = $this;
+
+        return $this->classroom->students->filter(function ($student) use ($self) {
+            return $self->hasUploaded($student->id) && isset($self->hasUploaded($student->id)->assessment);
+        })->count();
+    }
+//
+    public function countNotupload () {
+        $self = $this;
+
+        return $this->classroom->students->filter(function ($student) use ($self) {
+            return !$self->hasUploaded($student->id);
+        })->count();
+    }
+
 }

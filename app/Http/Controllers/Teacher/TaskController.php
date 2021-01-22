@@ -50,7 +50,7 @@ class TaskController extends Controller
         $dateDisplay = date('F j D, Y', strtotime($date));
 
         $classroom = Classroom::find($classroom);
-        $items = $this->item->whereDate('created_at', $date)->where('classroom_id', $classroom->id)->get();
+        $items = $this->item->whereDate('created_at', $date)->where('classroom_id', $classroom->id)->orderBy('created_at', 'desc')->get();
 
         return view('pages.teacher.task.get_by_classroom', compact('items', 'classroom', 'date' , 'dateDisplay'));
     }

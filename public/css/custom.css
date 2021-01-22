@@ -7,7 +7,7 @@ body {
 }
 .jumbotron {
     /*background: rgba(43,125,117, 0.2);*/
-    background: #f0f3f0;
+    background: #ebf7eb;
     border-radius: 0px;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
@@ -47,11 +47,14 @@ ion-icon {
 .card {
     background: #fff;
     border-radius: 8px;
+    border: 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px -8px;
 }
 .card-header {
     background: #fff;
     border-bottom: 0px;
     padding: 24px 20px;
+    border-radius: 8px !important;
 }
 .card-header:first-child {
     border-top-left-radius: 16px !important;
@@ -64,6 +67,11 @@ ion-icon {
 .card-title .text-primary {
     font-size: 12px;
 }
+.card-body:last-child {
+    padding-bottom: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+}
 
 .table {
     border: 0px;
@@ -72,6 +80,7 @@ ion-icon {
     /*border: 0px;*/
     background: #fff;
     padding: 30px 22px;
+    border-color: #eee;
 }
 .table.table-striped tr td h6 {
     font-size: 14px;
@@ -90,4 +99,7 @@ ion-icon {
 }
 .line-0 {
     line-height: 0;
+}
+.footer {
+    padding: 20px 0px;
 }

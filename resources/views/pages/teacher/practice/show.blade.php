@@ -19,7 +19,7 @@
                         Periode ({{date('j M Y', strtotime($practice->start))}} - {{date('j M Y', strtotime($practice->end))}})
                     </h6>
 
-                    <a href="" class="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModal">
+                    <a href="" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
                             <ion-icon name="person-add-outline" class="mr-2"></ion-icon> Tambah anggota
                         </span>
@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
-                    <ion-icon name="calendar-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
+                    <ion-icon name="navigate-circle-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
                     {{$practice->agency->name}} periode {{$practice->periode}}
                 </li>
 
@@ -70,7 +70,7 @@
                         @foreach($practice->members as $i => $member)
                             <tr>
                                 <td class="text-center" style="width: 60px;">
-                                    <img src="{{Avatar::create($i+1)->setDimension(50)->setFontSize(18)->toBase64()}}" />
+                                    <img src="https://randomuser.me/api/portraits/men/{{$i+1}}.jpg" width="50px" height="50px" style="border-radius: 50%;">
                                 </td>
                                 <td>
                                     <h6>{{$member->student->name}}</h6>

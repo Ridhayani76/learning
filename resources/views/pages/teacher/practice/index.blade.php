@@ -95,7 +95,7 @@
                                             </span>
                                         </td>
                                         <td style="vertical-align: middle" class="text-center">
-                                            <a href="" class="btn btn-outline-danger btn-sm mr-2 line-0" style="padding: 10px">
+                                            <a href="" class="btn btn-outline-danger btn-sm mr-2 line-0" data-toggle="tooltip" data-placement="top" title="Hapus" style="padding: 10px">
                                                 <ion-icon name="trash-outline" size="small"></ion-icon>
                                             </a>
                                             <a href="{{route('teacher.practice.show', ['practice' => $practice->id])}}" class="btn btn-outline-primary btn-sm">
