@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/classroom', 'ClassroomController');
         Route::resource('/classroom/{classroom}/student', 'StudentController');
+        Route::post('/teacher/{teacher}/reset-password', 'TeacherController@reset_password')->name('teacher.reset-password');
         Route::resource('/teacher', 'TeacherController');
         Route::resource('/course', 'CourseController');
         Route::resource('/agency', 'AgencyController');

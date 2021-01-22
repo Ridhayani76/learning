@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Schedule;
 use App\Student;
 use App\Task;
+use App\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -31,8 +32,12 @@ class TaskController extends Controller
         $prev = date('Y-m-d', strtotime('-1 days', strtotime($date)));
         $next = date('Y-m-d', strtotime('+1 days', strtotime($date)));
 
-        $classrooms = $this->classroom->with(['tasks' => function ($task) use ($date) {
-            return $task->whereDate('created_at', $date);
+        $course_ids = auth()->user()->teacher->courses->map(function ($course) {
+            return $course->id;
+        });
+
+        $classrooms = $this->classroom->with(['tasks' => function ($task) use ($date, $course_ids) {
+            return $task->whereDate('created_at', $date)->whereIn('course_id', $course_ids)->get();
         }])->orderBy('name', 'asc')->get();
         $amount_of_tasks = $classrooms->map(function ($classroom) {
             return $classroom->tasks->count();
@@ -49,8 +54,12 @@ class TaskController extends Controller
         $date = $request->date ? $request->date : date('Y-m-d');
         $dateDisplay = date('F j D, Y', strtotime($date));
 
+        $course_ids = auth()->user()->teacher->courses->map(function ($course) {
+            return $course->id;
+        });
+
         $classroom = Classroom::find($classroom);
-        $items = $this->item->whereDate('created_at', $date)->where('classroom_id', $classroom->id)->orderBy('created_at', 'desc')->get();
+        $items = $this->item->whereDate('created_at', $date)->whereIn('course_id', $course_ids)->where('classroom_id', $classroom->id)->orderBy('created_at', 'desc')->get();
 
         return view('pages.teacher.task.get_by_classroom', compact('items', 'classroom', 'date' , 'dateDisplay'));
     }
@@ -111,6 +120,9 @@ class TaskController extends Controller
         $task = $this->item->find($id);
         $students = Student::orderBy('name', 'asc')->where('classroom_id', $task->classroom_id)->orderBy('name', 'asc')->get();
 
+        if ($task->course->teacher_id != auth()->user()->teacher->id)
+            abort(403);
+
         return view('pages.teacher.task.show', ['students' => $students, 'task' => $task]);
     }
 
@@ -147,4 +159,7 @@ class TaskController extends Controller
     {
         //
     }
+
+
+
 }

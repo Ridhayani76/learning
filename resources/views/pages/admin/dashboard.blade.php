@@ -26,7 +26,7 @@
                             Total Guru
                         </h5>
 
-                        <a href="" class="btn btn-link" style="padding: 0px;">
+                        <a href="{{route('admin.teacher.index')}}" class="btn btn-link" style="padding: 0px;">
                             <span class="d-flex align-items-center">
                                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>
                             </span>
@@ -47,7 +47,7 @@
                             Total Kelas
                         </h5>
 
-                        <a href="" class="btn btn-link" style="padding: 0px;">
+                        <a href="{{route('admin.classroom.index')}}" class="btn btn-link" style="padding: 0px;">
                             <span class="d-flex align-items-center">
                                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>
                             </span>

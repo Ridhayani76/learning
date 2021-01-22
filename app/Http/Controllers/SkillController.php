@@ -27,6 +27,6 @@ class SkillController extends Controller
             'name' => $request->name
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Tempat praktik berhasil dibuat.');
     }
 }

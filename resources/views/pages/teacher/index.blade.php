@@ -13,7 +13,7 @@
 
                     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
-                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Baru
+                            <ion-icon name="person-add-outline" class="mr-2"></ion-icon> Tambah guru
                         </span>
                     </a>
                 </div>
@@ -22,6 +22,7 @@
     </div>
 
     <div class="container">
+
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -37,6 +38,8 @@
             </ol>
         </nav>
 
+        @include('layouts.message')
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -49,72 +52,65 @@
 
                     <div class="card-body" style="padding: 0px;">
 
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    {{$error}}
-                                @endforeach
-                            </div>
-                        @endif
+                        <table class="table table-striped" style="margin-bottom: 0px;">
 
-                        <form action="" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <table class="table table-striped" style="margin-bottom: 0px;">
-
-                                @foreach($teachers as $teacher)
-                                    <tr>
-                                        <td style="vertical-align: middle">
-                                            <h6>Nama</h6>
+                            @foreach($teachers as $teacher)
+                                <tr>
+                                    <td style="vertical-align: middle">
+                                        <h6>Nama</h6>
+                                        <span class="d-flex align-items-center">
+                                            <ion-icon name="person-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
+                                            {{$teacher->name}}
+                                        </span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <h6>NIP</h6>
+                                        <span class="d-flex align-items-center text-muted" style="letter-spacing: 1.2px; font-weight: 500;">
+                                            <ion-icon name="card-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
+                                            {{$teacher->nip}}
+                                        </span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <h6>Mata kuliah</h6>
+                                        <span class="d-flex align-items-center text-muted" style="font-weight: 500;">
+                                            <ion-icon name="book-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
+                                            {{$teacher->courses->count()}}
+                                        </span>
+                                    </td>
+                                    <td style="vertical-align: middle" class="text-center">
+                                        <a href="" class="btn btn-outline-danger mr-2" data-toggle="tooltip" title="Hapus" style="padding: 10px;">
                                             <span class="d-flex align-items-center">
-                                                <ion-icon name="person-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
-                                                {{$teacher->name}}
+                                                <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
                                             </span>
-                                        </td>
-                                        <td style="vertical-align: middle">
-                                            <h6>NIP</h6>
-                                            <span class="d-flex align-items-center text-muted" style="letter-spacing: 1.2px; font-weight: 500;">
-                                                <ion-icon name="card-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
-                                                {{$teacher->nip}}
+                                        </a>
+                                        <a href="#" data-url="{{route('admin.teacher.reset-password', ['teacher' => $teacher->id])}}" class="btn btn-outline-primary mr-2 ajax" data-toggle="tooltip" title="Reset Password" style="padding: 10px;">
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="key-outline" style="font-size: 20px;"></ion-icon>
                                             </span>
-                                        </td>
-                                        <td style="vertical-align: middle">
-                                            <h6>Mata kuliah</h6>
-                                            <span class="d-flex align-items-center text-muted" style="font-weight: 500;">
-                                                <ion-icon name="book-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
-                                                {{$teacher->courses->count()}}
+                                        </a>
+                                        <a href="" class="btn btn-outline-primary">
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="create-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                                Edit
                                             </span>
-                                        </td>
-                                        <td style="vertical-align: middle" class="text-center">
-                                            <a href="" class="btn btn-outline-danger mr-2" data-toggle="tooltip" title="Hapus" style="padding: 10px;">
-                                                <span class="d-flex align-items-center">
-                                                    <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
-                                                </span>
-                                            </a>
-                                            <a href="" class="btn btn-outline-primary mr-2" data-toggle="tooltip" title="Reset Password" style="padding: 10px;">
-                                                <span class="d-flex align-items-center">
-                                                    <ion-icon name="key-outline" style="font-size: 20px;"></ion-icon>
-                                                </span>
-                                            </a>
-                                            <a href="" class="btn btn-outline-primary">
-                                                <span class="d-flex align-items-center">
-                                                    <ion-icon name="create-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                                    Edit
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        </a>
 
-                                @endforeach
+                                        <form id="form-reset-{{$teacher->id}}" method="POST" action="{{route('admin.teacher.reset-password', ['teacher' => $teacher->id])}}">
+                                            @csrf
+                                        </form>
+                                    </td>
+                                </tr>
 
-                                @if($teachers->count() == 0)
-                                    <tr>
-                                        <td colspan="6" class="text-center">Tidak ada guru</td>
-                                    </tr>
-                                @endif
+                            @endforeach
 
-                                </tbody>
-                            </table>
-                        </form>
+                            @if($teachers->count() == 0)
+                                <tr>
+                                    <td colspan="6" class="text-center">Tidak ada guru</td>
+                                </tr>
+                            @endif
+
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
@@ -128,26 +124,51 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Kompetensi Baru</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Guru</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row align-items-center">
-                        <div class="col-12">Nama Kompetensi</div>
-                        <div class="col-12">
+                        <div class="col-4 text-right">Nama</div>
+                        <div class="col-8">
                             <input type="text" class="form-control" name="name">
                         </div>
                     </div>
 
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
+                    <div class="form-group row align-items-center">
+                        <div class="col-4 text-right">NIP</div>
+                        <div class="col-8">
+                            <input type="text" class="form-control" name="nip">
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4">
+                        <div class="col-12 offset-4">
+                            <button class="btn btn-primary" type="submit">
+                                <span class="d-flex align-items-center">
+                                    <ion-icon name="save-outline" class="mr-2"></ion-icon> Simpan
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+@endsection
+
+@section('js')
+    <script>
+        $('body').delegate('#reset', 'click', function (e) {
+            e.preventDefault();
+
+            var confirm = window.confirm('Apakah anda yakin ingin mereset password ?');
+            if (confirm) {
+                document.getElementById($(this).data('id')).submit();
+            }
+        })
+    </script>
 @endsection

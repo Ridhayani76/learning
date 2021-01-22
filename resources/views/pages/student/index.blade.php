@@ -43,6 +43,8 @@
             </ol>
         </nav>
 
+        @include('layouts.message')
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -55,17 +57,7 @@
 
                     <div class="card-body" style="padding: 0px;">
 
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    {{$error}}
-                                @endforeach
-                            </div>
-                        @endif
-
-                        <form action="" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <table class="table table-striped" style="margin-bottom: 0px;">
+                        <table class="table table-striped" style="margin-bottom: 0px;">
 
                                 @foreach($students as $i => $student)
                                     <tr>
@@ -115,7 +107,6 @@
 
                                 </tbody>
                             </table>
-                        </form>
 
                     </div>
                 </div>
@@ -124,30 +115,51 @@
     </div>
 
     <!-- Modal -->
-    <form action="{{route('admin.teacher.store')}}" method="POST" enctype="multipart/form-data" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="{{route('admin.student.store', ['classroom' => $classroom->id])}}" method="POST" enctype="multipart/form-data" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         @csrf
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
+
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Kompetensi Baru</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Murid</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row align-items-center">
-                        <div class="col-12">Nama Kompetensi</div>
-                        <div class="col-12">
-                            <input type="text" class="form-control" name="name">
+                        <div class="col-3 text-right">Kelas</div>
+                        <div class="col-9">
+                            <input type="text" class="form-control" name="classroom_name" value="{{$classroom->name}}" disabled>
                         </div>
                     </div>
 
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
+                    <div class="form-group row align-items-center">
+                        <div class="col-3 text-right">Nama</div>
+                        <div class="col-9">
+                            <input type="text" class="form-control" name="name" value="{{old('name')}}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row align-items-center">
+                        <div class="col-3 text-right">NIM</div>
+                        <div class="col-9">
+                            <input type="text" class="form-control" name="nim" value="{{old('nim')}}">
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-9 offset-3">
+                            <button class="btn btn-primary" type="submit">
+                                <span class="d-flex align-items-center">
+                                    <ion-icon name="save-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    Simpan
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </form>

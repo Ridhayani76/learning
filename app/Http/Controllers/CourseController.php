@@ -17,4 +17,18 @@ class CourseController extends Controller
 
         return view('pages.course.index', compact('courses'));
     }
+
+    public function store (Request $request) {
+        $this->validate($request, [
+            'name' => 'required|unique:classrooms,name',
+            'teacher_id' => 'required',
+        ]);
+
+        $this->course->create([
+            'name' => $request->name,
+            'teacher_id' => $request->teacher_id,
+        ]);
+
+        return redirect()->back()->with('message', 'Mata kuliah berhasil ditambahkan');
+    }
 }

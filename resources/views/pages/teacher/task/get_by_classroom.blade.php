@@ -61,6 +61,8 @@
             </ol>
         </nav>
 
+        @include('layouts.message')
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -87,14 +89,6 @@
 
                     <div class="card-body" style="padding: 0px">
 
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    {{$error}}
-                                @endforeach
-                            </div>
-                        @endif
-
                         <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
                             <table class="table table-striped" style="margin: 0px;">
@@ -117,7 +111,7 @@
                                         <td>
                                             <h6>Form Tugas</h6>
                                             <p class="text-muted">
-                                                <a href="{{$task->file}}" class="line-0 d-flex align-items-center">
+                                                <a href="{{url(Storage::url($task->file))}}" target="_blank" class="line-0 d-flex align-items-center">
                                                     <ion-icon name="document-outline" size="small" class="mr-1"></ion-icon> Download Form
                                                 </a>
                                             </p>
@@ -180,7 +174,7 @@
                         <div class="col-3 text-right">Mata Kuliah</div>
                         <div class="col-9">
                             <select name="course_id" class="form-control">
-                                @foreach(\App\Course::orderBy('name', 'asc')->get() as $course)
+                                @foreach(\App\Course::where('teacher_id', auth()->user()->teacher->id)->orderBy('name', 'asc')->get() as $course)
                                 <option value="{{$course->id}}">
                                     {{$course->name}}
                                 </option>

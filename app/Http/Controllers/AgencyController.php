@@ -29,6 +29,6 @@ class AgencyController extends Controller
             'address' => $request->address,
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Tempat praktik berhasil dibuat.');
     }
 }

@@ -11,6 +11,8 @@
 
     <link rel="icon" href="{{asset('img/practice-2.svg')}}">
 
+
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -165,10 +167,35 @@
     </footer>
 </div>
 
+@include('sweetalert::alert')
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
+
+        $('.ajax').click(function (e) {
+            e.preventDefault();
+
+            let token = $('meta[name="csrf-token"]').attr('content');
+
+            let confirm = window.confirm('Apakah anda yakin ?');
+            if (confirm) {
+                $.ajax({
+                    url: $(this).data('url'),
+                    method: 'POST',
+                    data: {_token: token },
+                    success: function (response) {
+                        alert(response.message);
+
+                        if (response.redirect)
+                        window.location = response.redirect;
+                    },
+                    error: function () {
+                        alert('Data tidak bisa diproses');
+                    }
+                })
+            }
+        });
     })
 </script>
 

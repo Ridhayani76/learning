@@ -20,7 +20,7 @@
                         </small>
                     </h1>
                     <p class="text-muted">Klik tombol dibawah untuk mendownload form/dokumen tugas.</p>
-                    <a href="" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                    <a href="{{url(Storage::url($task->file))}}" target="_blank" class="btn btn-primary mr-2">
                         <span class="d-flex align-items-center">
                             <ion-icon name="document-outline" class="mr-1"></ion-icon> Lihat form tugas
                         </span>
@@ -142,7 +142,7 @@
                                     </td>
                                     <td>
                                         <h6 class="key">{{$student->name}}</h6>
-                                        <span class="text-info" style="letter-spacing: 1.2px; font-weight: bold;">{{$student->nim ? $student->nim : '-'}}</span>
+                                        <span class="text-muted" style="letter-spacing: 1.2px; font-weight: 500;">{{$student->nim ? $student->nim : '-'}}</span>
                                     </td>
                                     <td>
                                         <h6 class="key">Status</h6>

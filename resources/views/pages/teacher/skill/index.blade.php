@@ -37,6 +37,8 @@
             </ol>
         </nav>
 
+        @include('layouts.message')
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -49,53 +51,42 @@
 
                     <div class="card-body" style="padding: 0px;">
 
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    {{$error}}
-                                @endforeach
-                            </div>
-                        @endif
+                        <table class="table table-striped" style="margin-bottom: 0px;">
 
-                        <form action="" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <table class="table table-striped" style="margin-bottom: 0px;">
-
-                                @foreach($skills as $skill)
-                                    <tr>
-                                        <td style="vertical-align: middle">
-                                            <h6>Kompetensi</h6>
+                            @foreach($skills as $skill)
+                                <tr>
+                                    <td style="vertical-align: middle">
+                                        <h6>Kompetensi</h6>
+                                        <span class="d-flex align-items-center">
+                                            <ion-icon name="flask-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
+                                            {{$skill->name}}
+                                        </span>
+                                    </td>
+                                    <td style="vertical-align: middle" class="text-center">
+                                        <a href="" class="btn btn-outline-danger mr-2" data-toggle="tooltip" title="Hapus" style="padding: 10px;">
                                             <span class="d-flex align-items-center">
-                                                <ion-icon name="flask-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
-                                                {{$skill->name}}
+                                                <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
                                             </span>
-                                        </td>
-                                        <td style="vertical-align: middle" class="text-center">
-                                            <a href="" class="btn btn-outline-danger mr-2" data-toggle="tooltip" title="Hapus" style="padding: 10px;">
-                                                <span class="d-flex align-items-center">
-                                                    <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
-                                                </span>
-                                            </a>
-                                            <a href="" class="btn btn-outline-primary">
-                                                <span class="d-flex align-items-center">
-                                                    <ion-icon name="create-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                                    Edit
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        </a>
+                                        <a href="" class="btn btn-outline-primary">
+                                            <span class="d-flex align-items-center">
+                                                <ion-icon name="create-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                                Edit
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
 
-                                @endforeach
+                            @endforeach
 
-                                @if($skills->count() == 0)
-                                    <tr>
-                                        <td colspan="6" class="text-center">Tidak ada kompetensi</td>
-                                    </tr>
-                                @endif
+                            @if($skills->count() == 0)
+                                <tr>
+                                    <td colspan="6" class="text-center">Tidak ada kompetensi</td>
+                                </tr>
+                            @endif
 
-                                </tbody>
-                            </table>
-                        </form>
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
@@ -104,7 +95,7 @@
     </div>
 
     <!-- Modal -->
-    <form action="{{route('teacher.skill.store')}}" method="POST" enctype="multipart/form-data" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="{{route(auth()->user()->role . '.skill.store')}}" method="POST" enctype="multipart/form-data" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         @csrf
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -116,15 +107,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row align-items-center">
-                        <div class="col-12">Nama Kompetensi</div>
-                        <div class="col-12">
-                            <input type="text" class="form-control" name="name">
+                        <div class="col-3 text-right">Nama</div>
+                        <div class="col-9">
+                            <input type="text" class="form-control" name="name" value="{{old('name')}}">
                         </div>
                     </div>
 
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
+                    <div class="row mt-4">
+                        <div class="col-9 offset-3">
+                            <button class="btn btn-primary" type="submit">
+                                <span class="d-flex align-items-center">
+                                    <ion-icon name="save-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    Simpan
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>

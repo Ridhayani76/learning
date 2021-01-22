@@ -17,4 +17,16 @@ class ClassroomController extends Controller
 
         return view('pages.classroom.index', compact('classrooms'));
     }
+
+    public function store (Request $request) {
+        $this->validate($request, [
+            'name' => 'required|unique:classrooms,name',
+        ]);
+
+        $this->classroom->create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->back()->with('message', 'Kelas berhasil ditambahkan');
+    }
 }
