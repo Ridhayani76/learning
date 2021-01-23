@@ -11,6 +11,8 @@
 
     <link rel="icon" href="{{asset('img/practice-2.svg')}}">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.css"/>
+
 
 
     <!-- Scripts -->
@@ -72,9 +74,11 @@
                             </li>
                         @elseif(Auth::user()->role == "student")
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('student.task.index') }}">{{ __('Tugas') }}</a>
+                                <a class="nav-link d-flex align-items-center" href="{{ route('student.task.index') }}">
+                                    <ion-icon name="folder-open-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Tugas') }}
+                                </a>
                             </li>
-
                         @elseif(Auth::user()->role == "admin")
                             <li class="nav-item">
                                 <a class="nav-link d-flex aign-items-center" href="{{ route('admin.teacher.index') }}">

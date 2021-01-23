@@ -18,8 +18,26 @@ class Task extends Model
         return $this->belongsTo(Classroom::class);
     }
 
+    public function hasNotUploaded ($student_id) {
+        $task_upload = $this->task_uploads()->where('student_id', $student_id)->first();
+
+        return !$task_upload;
+    }
+
     public function hasUploaded ($student_id) {
-        return $this->task_uploads()->where('student_id', $student_id)->first();
+        $task_upload = $this->task_uploads()->where('student_id', $student_id)->first();
+
+        if (!isset($task_upload->assessment) && $task_upload)
+            return $task_upload;
+
+        return false;
+    }
+
+    public function hasAssessed ($student_id) {
+        $task_upload = $this->task_uploads()->where('student_id', $student_id)->first();
+        $assessment = isset($task_upload->assessment) ? $task_upload->assessment : false;
+
+        return $assessment;
     }
 
     public function course () {

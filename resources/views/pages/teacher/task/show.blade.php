@@ -147,10 +147,17 @@
                                     <td>
                                         <h6 class="key">Status</h6>
                                         @if($task->hasUploaded($student->id))
-                                            <span class="badge badge-{{isset($task->hasUploaded($student->id)->assessment) ? 'primary' : 'success'}}">
+                                            <span class="badge badge-success">
                                                 <span class="d-flex align-items-center">
-                                                    <ion-icon name="{{isset($task->hasUploaded($student->id)->assessment) ? 'create-outline' : 'checkmark-circle-outline'}}" class="mr-1" style="font-size: 12px;"></ion-icon>
-                                                    {{isset($task->hasUploaded($student->id)->assessment) ? 'Telah Dinilai' : 'Mengumpulkan'}}
+                                                    <ion-icon name="mail-open-outline" class="mr-1" style="font-size: 12px;"></ion-icon>
+                                                    Mengumpulkan
+                                                </span>
+                                            </span>
+                                        @elseif($task->hasAssessed($student->id))
+                                            <span class="badge badge-primary">
+                                                <span class="d-flex align-items-center">
+                                                    <ion-icon name="checkmark-outline" class="mr-1" style="font-size: 12px;"></ion-icon>
+                                                    Dinilai
                                                 </span>
                                             </span>
                                         @else
@@ -163,25 +170,24 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if(isset($task->hasUploaded($student->id)->assessment))
-                                            <h6>Nilai</h6>
-                                            <span class="text-primary">
-                                                <span style="letter-spacing: 1.2px; font-weight: bold;">
-                                                    {{$task->hasUploaded($student->id)->assessment->score}}
-                                                </span>
-                                                <small>({{$task->hasUploaded($student->id)->assessment->scoreTitle}})</small>
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td>
                                         @if($task->hasUploaded($student->id))
                                             <h6 class="key">Tanggal submit</h6>
                                             <span class="text-muted" style="font-size: 12px;">
                                                {{$task->hasUploaded($student->id)->created_at->diffForHumans()}}
                                             </span>
                                         @endif
+
+                                        @if($task->hasAssessed($student->id))
+                                            <h6>Nilai</h6>
+                                            <span class="text-primary">
+                                            <span style="letter-spacing: 1.2px; font-weight: bold;">
+                                                {{$task->hasAssessed($student->id)->score}}
+                                            </span>
+                                            <small>({{$task->hasAssessed($student->id)->scoreTitle}})</small>
+                                        </span>
+                                        @endif
                                     </td>
-                                    <td class="">
+                                    <td>
                                         @if($task->hasUploaded($student->id))
                                             <a href="{{url(Storage::url($task->hasUploaded($student->id)->file))}}" data-toggle="tooltip" title="Lihat hasil pengerjaan" data-placement="top" class="btn btn-primary mr-2" style="padding: 10px;">
                                                 <span class="d-flex align-items-center">
@@ -189,6 +195,17 @@
                                                 </span>
                                             </a>
                                             <a href="#" class="btn btn-outline-primary" onclick="assess(event, '{{$task->title}}', '{{$task->course->name}}', '{{$student->name}}', '{{$student->nim}}', {{$task->hasUploaded($student->id)->id}}, {{isset($task->hasUploaded($student->id)->assessment) ? $task->hasUploaded($student->id)->assessment->score : '0'}})">
+                                                <span class="d-flex align-items-center">
+                                                    <ion-icon name="create-outline" class="mr-2"></ion-icon> Nilai
+                                                </span>
+                                            </a>
+                                        @elseif($task->hasAssessed($student->id))
+                                            <a href="{{url(Storage::url($task->hasAssessed($student->id)->task_upload->file))}}" data-toggle="tooltip" title="Lihat hasil pengerjaan" data-placement="top" class="btn btn-primary mr-2" style="padding: 10px;">
+                                                <span class="d-flex align-items-center">
+                                                    <ion-icon name="open-outline"></ion-icon>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="btn btn-outline-primary" onclick="assess(event, '{{$task->title}}', '{{$task->course->name}}', '{{$student->name}}', '{{$student->nim}}', {{$task->hasAssessed($student->id)->task_upload->id}}, {{$task->hasAssessed($student->id)->score}})">
                                                 <span class="d-flex align-items-center">
                                                     <ion-icon name="create-outline" class="mr-2"></ion-icon> Nilai
                                                 </span>

@@ -90,6 +90,10 @@ ion-icon {
     font-size: 16px;
 }
 
+.table.table-sub.table-striped tr td {
+    background: #f8f5f5;
+}
+
 .btn {
     border-radius: 6px;
     padding: 10px 24px;
@@ -130,4 +134,27 @@ ion-icon {
 .modal-header {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+}
+
+
+.progress-bar {
+    font-weight: bold;
+    font-size: 9px;
+}
+
+.card-calendar {
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+    transition: .3s ease-in;
+}
+.card-calendar.hide {
+    transform: translateY(100%);
+    transition: .5s ease-out;
+}
+.card-calendar .card-body {
+    overflow: auto;
 }
