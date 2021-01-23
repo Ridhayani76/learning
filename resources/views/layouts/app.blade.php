@@ -168,6 +168,7 @@
 </div>
 
 @include('sweetalert::alert')
+<script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
     $(function () {
@@ -177,25 +178,81 @@
             e.preventDefault();
 
             let token = $('meta[name="csrf-token"]').attr('content');
+            let text = $(this).data('text');
 
-            let confirm = window.confirm('Apakah anda yakin ?');
-            if (confirm) {
-                $.ajax({
-                    url: $(this).data('url'),
-                    method: 'POST',
-                    data: {_token: token },
-                    success: function (response) {
-                        alert(response.message);
+            Swal.fire({
+                "title": "Konfirmasi",
+                "text": text ? text : "Apakah kamu yakin ?",
+                "width":"32rem",
+                "heightAuto":true,
+                "padding":"1.25rem",
+                "showConfirmButton":true,
+                "showCloseButton":false,
+                "customClass":{
+                    "container":null,
+                    "popup":null,
+                    "header":null,
+                    "title":null,
+                    "closeButton":null,
+                    "icon":null,
+                    "image":null,
+                    "content":null,
+                    "input":null,
+                    "actions":null,
+                    "confirmButton":"btn btn-primary",
+                    "cancelButton":null,"footer":null
+                },
+                "icon":"question",
+                "showCancelButton":true,
+                "cancelButtonText":"Batalkan",
+                "cancelButtonColor":"#aaa",
+                "confirmButtonText":"Konfirmasi",
+                "confirmButtonColor":"#2B7D75",
+                "allowOutsideClick":false
+            }).then((result) => {
+                if (result.isConfirmed) {
 
-                        if (response.redirect)
-                        window.location = response.redirect;
-                    },
-                    error: function () {
-                        alert('Data tidak bisa diproses');
-                    }
-                })
-            }
+                    $.ajax({
+                        url: $(this).data('url'),
+                        method: 'POST',
+                        data: {_token: token },
+                        success: function (response) {
+                            Swal.fire({
+                                title: 'Berhasil',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'Tutup',
+                                confirmButtonColor: '#2B7D75',
+                            })
+
+                            if (response.redirect)
+                                window.location = response.redirect;
+                        },
+                        error: function () {
+                            Swal.fire({
+                                title: 'Gagal',
+                                text: 'Data tidak bisa diproses. Silahkan coba kembali.',
+                                icon: 'error',
+                                confirmButtonText: 'Coba Kembali',
+                                confirmButtonColor: '#2B7D75',
+                            })
+                        }
+                    })
+
+
+                }
+            });
+
         });
+
+        $('#exampleModal').on('show.bs.modal', function() {
+            setTimeout(() => {
+                if ($('#exampleModal .autofocus').length > 0) {
+                    $('#exampleModal .autofocus')[0].focus();
+                }
+            }, 500);
+        })
+
     })
 </script>
 

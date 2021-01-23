@@ -8,6 +8,7 @@ class Teacher extends Model
 {
     //
     protected $guarded = [];
+    protected $appends = ['firstName'];
 
     public function courses () {
         return $this->hasMany(Course::class);
@@ -15,5 +16,9 @@ class Teacher extends Model
 
     public function user () {
         return $this->belongsTo(User::class);
+    }
+
+    public function getFirstNameAttribute () {
+        return explode(' ', $this->name)[0];
     }
 }

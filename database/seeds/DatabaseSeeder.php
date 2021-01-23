@@ -16,14 +16,6 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create('id_ID');
         // $this->call(UsersTableSeeder::class)
 
-        \App\Student::all()->each(function ($student) use ($faker) {
-            $student->update([
-                'nim' => $faker->numerify('##########'),
-            ]);
-        });
-
-        exit;
-
         // Generate Admin
         $admin = [
             'username' => 'admin',
@@ -43,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $teacher = \App\Teacher::create([
             'name' => $faker->name,
             'user_id' => $user->id,
+            'nip' => $faker->numerify('##########'),
         ]);
 
         // Generate Course
@@ -80,6 +73,7 @@ class DatabaseSeeder extends Seeder
                     $student = \App\Student::create([
                         'name' => $faker->name,
                         'user_id' => $user->id,
+                        'nim' => $faker->numerify('##########'),
                         'classroom_id' => $classroom->id,
                     ]);
 

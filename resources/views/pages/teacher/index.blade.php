@@ -83,7 +83,7 @@
                                                 <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
                                             </span>
                                         </a>
-                                        <a href="#" data-url="{{route('admin.teacher.reset-password', ['teacher' => $teacher->id])}}" class="btn btn-outline-primary mr-2 ajax" data-toggle="tooltip" title="Reset Password" style="padding: 10px;">
+                                        <a href="#" data-url="{{route('admin.teacher.reset-password', ['teacher' => $teacher->id])}}" class="btn btn-outline-primary mr-2 ajax" data-toggle="tooltip" title="Reset Password" data-text="Jika kamu mengkonfirmasi, password akan direset sesuai dengan nama depan ({{strtolower($teacher->firstName)}})." style="padding: 10px;">
                                             <span class="d-flex align-items-center">
                                                 <ion-icon name="key-outline" style="font-size: 20px;"></ion-icon>
                                             </span>
@@ -121,32 +121,31 @@
     <!-- Modal -->
     <form action="{{route('admin.teacher.store')}}" method="POST" enctype="multipart/form-data" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         @csrf
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Guru</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <ion-icon name="close-outline"></ion-icon>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group row align-items-center">
-                        <div class="col-4 text-right">Nama</div>
-                        <div class="col-8">
-                            <input type="text" class="form-control" name="name">
-                        </div>
-                    </div>
 
-                    <div class="form-group row align-items-center">
-                        <div class="col-4 text-right">NIP</div>
-                        <div class="col-8">
-                            <input type="text" class="form-control" name="nip">
+                    <div class="row">
+                        <div class="form-group mb-3 col-12">
+                            <label for="name" class="text-muted">Nama</label>
+                            <input type="text" id="name" class="form-control autofocus" name="name" value="{{old('name')}}">
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="nip" class="text-muted" data-toggle="tooltip" title="NIP Digunakan sebagai Username" data-placement="right">NIP (Username)</label>
+                            <input type="text" id="nip" class="form-control" name="nip" value="{{old('nip')}}">
                         </div>
                     </div>
 
 
                     <div class="row mt-4">
-                        <div class="col-12 offset-4">
+                        <div class="col-12">
                             <button class="btn btn-primary" type="submit">
                                 <span class="d-flex align-items-center">
                                     <ion-icon name="save-outline" class="mr-2"></ion-icon> Simpan
@@ -160,15 +159,3 @@
     </form>
 @endsection
 
-@section('js')
-    <script>
-        $('body').delegate('#reset', 'click', function (e) {
-            e.preventDefault();
-
-            var confirm = window.confirm('Apakah anda yakin ingin mereset password ?');
-            if (confirm) {
-                document.getElementById($(this).data('id')).submit();
-            }
-        })
-    </script>
-@endsection

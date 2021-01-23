@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Course;
 use App\Http\Controllers\Controller;
 use App\Schedule;
 use App\Task;
@@ -12,18 +13,16 @@ use Illuminate\Support\Facades\Storage;
 class TaskController extends Controller
 {
     //
-    function __construct (Task $task) {
-        return $this->item = $task;
+    function __construct (Task $task, Course $course) {
+        $this->item = $task;
+        $this->course = $course;
     }
 
     public function index (Request $request) {
-        $date = $request->date ? $request->date : date('Y-m-d');
 
-        $classroom = auth()->user()->student->classroom_id;
+        $courses = $this->course->orderBy('name', 'asc')->get();
 
-        $items = $this->item->orderBy('created_at', 'desc')->where('classroom_id', $classroom)->get();
-
-        return view('pages.student.task.index', compact('items', 'date'));
+        return view('pages.student.task.index', compact('courses'));
     }
 
     public function store(Request $request)

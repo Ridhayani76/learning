@@ -8,9 +8,9 @@
                     <img src="{{asset('img/task.svg')}}" alt="" class="hero-image">
                 </div>
                 <div class="col-md-8">
-                    <h6>{{date('D, j F Y', strtotime($date))}}</h6>
-                    <h1>List Tugas</h1>
-                    <p class="text-muted">Kamu memiliki {{$items->count()}} tugas ditanggal ini.</p>
+                    <h6>Penugasan</h6>
+                    <h1>List Tugas Per Mata Kuliah</h1>
+                    <p class="text-muted">Kamu memiliki {{$courses->count()}} tugas ditanggal ini.</p>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('teacher.dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{route('teacher.task.index')}}">Penugasan ({{date('j F Y', strtotime($date))}})</a></li>
+                <li class="breadcrumb-item"><a href="{{route('teacher.task.index')}}">Penugasan</a></li>
                 <li class="breadcrumb-item active" aria-current="page">List Tugas</li>
             </ol>
         </nav>
@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5 class="card-title">
-                            {{ __('List Tugas') }}
+                            {{ __('List Tugas Per Mata kuliah') }}
                         </h5>
                     </div>
 
@@ -48,45 +48,24 @@
                             <table class="table table-striped" style="margin: 0px;">
                                 <tbody>
 
-                                @foreach($items as $task)
+                                @foreach($courses as $course)
                                     <tr>
                                         <td>
-                                            <h6>{{$task->title}}</h6>
-                                            <p class="text-muted">{{$task->course->name}}</p>
-                                        </td>
-                                        <td>
-                                            <h6>Batas pengumpulan</h6>
-                                            <p class="text-muted">{{$task->max_date_upload ? date('j F Y', strtotime($task->max_date_upload)) : '-'}}</p>
-                                        </td>
-                                        <td>
-                                            <h6>Form Tugas</h6>
-                                            <p class="text-muted">
-                                                <a href="{{$task->file}}" class="line-0 d-flex align-items-center"><ion-icon name="download-outline" size="small" class="mr-1"></ion-icon> Download</a>
-                                            </p>
+                                            <h6>Mata Kuliah</h6>
+                                            <span class="text-muted">
+                                                {{$course->name}}
+                                            </span>
                                         </td>
                                         <td class="text-center">
 
-                                            @if($task->hasUploaded(Auth::user()->student->id))
-                                                <a href="#" onclick="upload(event, {{$task->id}}, '{{$task->course->name}}', '{{$task->title}}')" class="btn btn-link btn-sm">
-                                                <span class="d-flex align-items-center">
-                                                    <ion-icon name="eye-outline" class="mr-2"></ion-icon> Lihat Pengerjaan
-                                                </span>
-                                                </a>
-                                            @else
-                                            <a href="#" onclick="upload(event, {{$task->id}}, '{{$task->course->name}}', '{{$task->title}}')" class="btn btn-outline-primary btn-sm">
-                                                <span class="d-flex align-items-center">
-                                                    <ion-icon name="cloud-upload-outline" class="mr-2"></ion-icon> Upload Pengerjaan
-                                                </span>
-                                            </a>
-                                            @endif
                                         </td>
                                     </tr>
 
                                 @endforeach
 
-                                @if($items->count() == 0)
+                                @if($courses->count() == 0)
                                     <tr>
-                                        <td colspan="6" class="text-center">Tidak ada tugas</td>
+                                        <td colspan="6" class="text-center">Tidak ada mata kuliah</td>
                                     </tr>
                                 @endif
 

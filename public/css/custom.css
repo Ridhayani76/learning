@@ -7,7 +7,7 @@ body {
 }
 .jumbotron {
     /*background: rgba(43,125,117, 0.2);*/
-    background: #ebf7eb;
+    background: #c6e0c6;
     border-radius: 0px;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
@@ -102,4 +102,32 @@ ion-icon {
 }
 .footer {
     padding: 20px 0px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 3px !important;
+    margin-left: 4px;
+}
+.form-control {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 6px;
+    border-width: 2px;
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: #2B7D75;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.modal-content {
+    border-radius: 8px;
+}
+.modal-header {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
