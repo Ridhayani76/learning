@@ -2,14 +2,20 @@
 
 namespace App;
 
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 
 class CalendarAcademicEvent extends Model
 {
+    use Uuids;
+
     //
     protected $guarded = [];
     protected $appends = ['dateDisplay'];
 
+    public function calendar_academic () {
+        return $this->belongsTo(CalendarAcademic::class);
+    }
     public function getDateDisplayAttribute () {
         if ($this->start == $this->end) {
             return date('j M', strtotime($this->start));

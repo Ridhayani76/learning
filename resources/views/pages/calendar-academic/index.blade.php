@@ -16,11 +16,17 @@
                     <p class="text-muted">Klik tombol dibawah untuk membuat data kelas baru</p>
 
                     @if(auth()->user()->role == 'admin')
-                    <a href="" class="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModal">
+                        <a href="" class="btn btn-primary mr-3" data-toggle="modal" data-target="#exampleModal">
+                            <span class="d-flex align-items-center">
+                                <ion-icon name="add-outline" class="mr-2"></ion-icon> Tambah Kegiatan
+                            </span>
+                        </a>
+                    @else()
+                        <a href="#" onclick="openCalendar(event)" class="btn btn-primary mr-3">
                         <span class="d-flex align-items-center">
-                            <ion-icon name="add-outline" class="mr-2"></ion-icon> Tambah Kegiatan
+                            <ion-icon name="calendar-outline" class="mr-2"></ion-icon> Buka Kalender
                         </span>
-                    </a>
+                        </a>
                     @endif
                     <a href="" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
                         <span class="d-flex align-items-center">
@@ -48,24 +54,37 @@
             </ol>
         </nav>
 
+        <div class="card card-calendar hide">
+            <div class="card-header">
+                <a href="" onclick="openCalendar(event)" class="btn btn-outline-primary">
+                        <span class="d-flex align-items-center">
+                            <ion-icon name="arrow-back-outline" class="mr-1"></ion-icon> Kembali
+                        </span>
+                </a>
+            </div>
+            <div class="card-body">
+                {!! $calendar->calendar() !!}
+            </div>
+        </div>
+
         @include('layouts.message')
 
         <div class="row justify-content-center">
 
-            @foreach($calendars as $calendar)
+            @foreach($calendars as $c)
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <div>
-                            <h5 class="card-title mb-1">Semester {{$calendar->semester}}</h5>
-                            <span class="text-muted" style="font-size: 14px; letter-spacing: 1.1px;">{{$calendar->period}}</span>
+                            <h5 class="card-title mb-1">Semester {{$c->semester}}</h5>
+                            <span class="text-muted" style="font-size: 14px; letter-spacing: 1.1px;">{{$c->period}}</span>
                         </div>
                     </div>
 
                     <div class="card-body" style="padding-top: 0px;">
 
                         <ul class="timeline">
-                            @foreach($calendar->events()->orderBy('start', 'asc')->get() as $event)
+                            @foreach($c->events()->orderBy('start', 'asc')->get() as $event)
                             <li>
                                 <span class="text-primary" style="font-weight: 500; letter-spacing: 1.1px;">{{$event->dateDisplay}}</span>
 
@@ -82,8 +101,8 @@
                         </ul>
 
 
-                        @if($calendar->events->count() > 0)
-                            <div class="text-left text-muted mb-3 mt-4" style="font-size: 12px;">Ada {{$calendar->events->count()}} kegiatan.</div>
+                        @if($c->events->count() > 0)
+                            <div class="text-left text-muted mb-3 mt-4" style="font-size: 12px;">Ada {{$c->events->count()}} kegiatan.</div>
                         @else
                             <div class="text-left text-muted mb-3" style="font-size: 12px; margin-top: -16px;">Tidak ada kegiatan.</div>
                         @endif
@@ -154,4 +173,28 @@
             </div>
         </div>
     </form>
+@endsection
+
+@section('css')
+    <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+@endsection
+
+@section('js')
+    {!! $calendar->script() !!}}
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
+
+    <script>
+        function openCalendar(e) {
+            e.preventDefault();
+            $('.card-calendar').toggleClass('hide');
+        }
+        function upload (e, id, course, title) {
+            e.preventDefault();
+            $('#exampleModal').modal('show');
+            $('#task-id').val(id);
+            $('#tugas').val(title + ' - ' + course);
+        }
+    </script>
 @endsection

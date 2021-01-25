@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 
 class CalendarAcademic extends Model
 {
+    use Uuids;
     //
     protected $guarded = [];
     protected $appends = ['period'];

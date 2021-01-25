@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+    use Uuids;
+
     protected $guarded =  [];
     protected $appends = ['firstName'];
 

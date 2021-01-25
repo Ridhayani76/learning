@@ -35,6 +35,6 @@ class AssessmentController extends Controller
             ]);
         }
 
-        return redirect()->route('teacher.task.show', ['task' => $assessment->task_upload->task->id]);
+        return redirect()->route('teacher.task.show', ['task' => $assessment->task_upload->task->id])->with('message', 'Nilai berhasil diperbarui.');
     }
 }

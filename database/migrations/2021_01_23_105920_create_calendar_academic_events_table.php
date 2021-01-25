@@ -14,8 +14,8 @@ class CreateCalendarAcademicEventsTable extends Migration
     public function up()
     {
         Schema::create('calendar_academic_events', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('calendar_academic_id');
+            $table->uuid('id')->primary();
+            $table->uuid('calendar_academic_id');
             $table->foreign('calendar_academic_id')->references('id')->on('calendar_academics')->onDelete('cascade')->onUpdate('cascade');
             $table->date('start')->nullable();
             $table->date('end')->nullable();

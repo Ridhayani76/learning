@@ -14,10 +14,10 @@ class CreatePracticeMembersTable extends Migration
     public function up()
     {
         Schema::create('practice_members', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('practice_id');
+            $table->uuid('id')->primary();
+            $table->uuid('practice_id');
             $table->foreign('practice_id')->references('id')->on('practices')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('student_id');
+            $table->uuid('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade')->onDelete('cascade');
             $table->char('semester');
             $table->timestamps();

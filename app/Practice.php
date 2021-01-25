@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Practice extends Model
 {
+    use Uuids;
+
     protected $appends = ['periode'];
     //
     protected $guarded = [];

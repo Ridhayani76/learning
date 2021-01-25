@@ -5,29 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82f25c70-ecc4-422d-837d-4c8ad5dbde9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/calendar-academic/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/student/practice/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/student/practice/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Traits/Uuids.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Agency.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Agency.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Assessment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Assessment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/CalendarAcademic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CalendarAcademic.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CalendarAcademicDescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CalendarAcademicDescription.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/CalendarAcademicEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CalendarAcademicEvent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PracticeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PracticeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Classroom.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Classroom.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ClassroomCourse.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClassroomCourse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Course.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AssessmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AssessmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CalendarAcademicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CalendarAcademicController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Student/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Student/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teacher/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teacher/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Practice.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Practice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/PracticeMember.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/PracticeMember.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Skill.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Skill.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Student.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TaskUpload.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TaskUpload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Teacher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142610_create_classrooms_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142610_create_classrooms_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142611_create_teachers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142611_create_teachers_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142616_create_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142616_create_students_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142620_create_courses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142620_create_courses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142628_create_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142628_create_tasks_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142637_create_task_uploads_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142637_create_task_uploads_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142656_create_assessments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142656_create_assessments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142709_create_skills_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142709_create_skills_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142733_create_agencies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142733_create_agencies_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142754_create_practices_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142754_create_practices_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_09_142800_create_practice_members_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_09_142800_create_practice_members_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_141553_create_classroom_courses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_22_141553_create_classroom_courses_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_23_105838_create_calendar_academics_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_23_105838_create_calendar_academics_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_23_105920_create_calendar_academic_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_23_105920_create_calendar_academic_events_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_23_105934_create_calendar_academic_descriptions_table.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/admin/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/admin/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/classroom/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/classroom/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/calendar-academic/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/calendar-academic/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/student/task/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/student/task/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/teacher/agency/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/agency/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/teacher/practice/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/practice/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/teacher/practice/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/practice/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/teacher/task/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/task/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +264,7 @@
       <workItem from="1611231952104" duration="6006000" />
       <workItem from="1611275551678" duration="33490000" />
       <workItem from="1611538696645" duration="4508000" />
-      <workItem from="1611547988336" duration="5121000" />
+      <workItem from="1611547988336" duration="8759000" />
     </task>
     <servers />
   </component>

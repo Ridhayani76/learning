@@ -14,10 +14,10 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('classroom_id');
+            $table->uuid('classroom_id');
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name', 100);
             $table->char('nim')->nullable();

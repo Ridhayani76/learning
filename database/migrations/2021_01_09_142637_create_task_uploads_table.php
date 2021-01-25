@@ -14,10 +14,10 @@ class CreateTaskUploadsTable extends Migration
     public function up()
     {
         Schema::create('task_uploads', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('task_id');
+            $table->uuid('id')->primary();
+            $table->uuid('task_id');
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('student_id');
+            $table->uuid('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
             $table->string('file');
             $table->text('note')->nullable();

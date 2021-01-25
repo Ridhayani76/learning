@@ -61,6 +61,8 @@
             </ol>
         </nav>
 
+        @include('layouts.message')
+
         <div class="card card-calendar hide">
             <div class="card-header">
                 <a href="" onclick="openCalendar(event)" class="btn btn-outline-primary">
@@ -119,33 +121,38 @@
                                             @elseif($course->task_finished_percentage == 100)
                                                 <span class="text-primary d-flex align-items-center">
                                                     <ion-icon name="checkmark-outline" class="mr-2" style="font-size: 14px"></ion-icon>
-                                                    Sudah selesai semua.
+                                                    Sudah dinilai semua.
+                                                </span>
+                                            @elseif($course->task_submited_percentage == 100)
+                                                <span class="text-success d-flex align-items-center">
+                                                    <ion-icon name="navigate-circle-outline" class="mr-2" style="font-size: 14px"></ion-icon>
+                                                    Sudah dikerjakan semua.
                                                 </span>
                                             @elseif($course->task_unsubmited_percentage == 100)
-                                                <span class="text-info d-flex align-items-center">
+                                                <span class="text-danger d-flex align-items-center">
                                                     <ion-icon name="warning-outline" class="mr-2" style="font-size: 14px"></ion-icon>
-                                                    Belum ada pengerjaan.
+                                                    Belum dikerjakan semua.
                                                 </span>
                                             @else
                                                 <div class="progress">
                                                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" data-toggle="tooltip" data-placement="bottom" title="Telah dinilai" role="progressbar" style="width: {{$course->task_finished_percentage}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
                                                         {{$course->task_finished_percentage}}%
                                                     </div>
-                                                    <div class="progress-bar bg-success" data-toggle="tooltip" data-placement="bottom" title="Belum dinilai" role="progressbar" style="width: {{$course->task_submited_percentage}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" data-toggle="tooltip" data-placement="bottom" title="Belum dinilai" role="progressbar" style="width: {{$course->task_submited_percentage}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
                                                         {{$course->task_submited_percentage}}%
                                                     </div>
-                                                    <div class="progress-bar bg-info" role="progressbar" data-toggle="tooltip" data-placement="bottom" title="Belum mengumpulkan" style="width: {{$course->task_unsubmited_percentage}}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" data-toggle="tooltip" data-placement="bottom" title="Belum mengumpulkan" style="width: {{$course->task_unsubmited_percentage}}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                                         {{$course->task_unsubmited_percentage}}%
                                                     </div>
                                                 </div>
                                             @endif
 
                                         </td>
-                                        <td class="text-center">
-                                            <a href="#collapse-{{$i}}" data-toggle="collapse" class="btn btn-link text-primary">
+                                        <td class="text-center" style="vertical-align: middle; text-decoration: underline">
+                                            <a href="#collapse-{{$i}}" data-toggle="collapse" class="text-primary">
                                                 <span class="d-flex align-items-center">
-{{--                                                    <ion-icon name="create-outline" class="mr-2"></ion-icon> --}}
                                                     Detail
+                                                    <ion-icon name="chevron-down-circle-outline" style="font-size: 14px;" class="ml-2"></ion-icon>
                                                 </span>
                                             </a>
                                         </td>
@@ -166,11 +173,11 @@
                                                             <td style="{{$i == 0 ? 'border-top: 0px;' : ''}}" width="20%">
                                                                 <h6 class="d-flex align-items-center">
                                                                     @if ($task->hasNotUploaded(auth()->user()->student->id))
-                                                                        <ion-icon name="warning-outline" style="font-size: 18px;" class="mr-2 text-info"></ion-icon>
+                                                                        <ion-icon name="warning-outline" style="font-size: 18px;" class="mr-2 text-danger" data-toggle="tooltip" title="Belum dikerjakan"></ion-icon>
                                                                     @elseif ($task->hasUploaded(auth()->user()->student->id))
-                                                                        <ion-icon name="navigate-circle-outline" style="font-size: 18px;" class="mr-2 text-success"></ion-icon>
+                                                                        <ion-icon name="navigate-circle-outline" style="font-size: 18px;" class="mr-2 text-success" data-toggle="tooltip" title="Telah dikerjakan"></ion-icon>
                                                                     @elseif ($task->hasAssessed(auth()->user()->student->id))
-                                                                        <ion-icon name="checkmark-circle-outline" style="font-size: 18px;" class="mr-2 text-primary"></ion-icon>
+                                                                        <ion-icon name="checkmark-circle-outline" style="font-size: 18px;" class="mr-2 text-primary" data-toggle="tooltip" title="Telah dinilai"></ion-icon>
                                                                     @endif
                                                                     Judul Tugas
                                                                 </h6>

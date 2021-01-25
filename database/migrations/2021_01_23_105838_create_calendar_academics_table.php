@@ -14,7 +14,7 @@ class CreateCalendarAcademicsTable extends Migration
     public function up()
     {
         Schema::create('calendar_academics', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('semester');
             $table->year('year');
             $table->timestamps();

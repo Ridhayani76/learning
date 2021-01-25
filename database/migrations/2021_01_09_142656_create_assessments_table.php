@@ -14,8 +14,8 @@ class CreateAssessmentsTable extends Migration
     public function up()
     {
         Schema::create('assessments', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('task_upload_id');
+            $table->uuid('id')->primary();
+            $table->uuid('task_upload_id');
             $table->foreign('task_upload_id')->references('id')->on('task_uploads')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('score');
             $table->timestamps();

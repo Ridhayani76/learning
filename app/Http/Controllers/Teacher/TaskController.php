@@ -105,7 +105,7 @@ class TaskController extends Controller
             'max_date_upload' => $request->max_date_upload,
         ]);
 
-        return redirect()->route('teacher.task.show', ['task' => $task->id]);
+        return redirect()->route('teacher.task.show', ['task' => $task->id])->with('message', 'Tugas berhasil dibuat');
     }
 
     /**

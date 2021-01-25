@@ -49,16 +49,22 @@ class TaskController extends Controller
                 return $task->hasAssessed($student->id);
             })->count();
             $course->task_finished_percentage = $course->task_finished > 0 ?  ($course->task_finished/ $course->tasks->count() * 100) : 0;
+            $course->task_finished_percentage = round($course->task_finished_percentage);
+
 
             $course->task_submited = $course->tasks->filter(function ($task) use ($student) {
                return $task->hasUploaded($student->id);
             })->count();
             $course->task_submited_percentage = $course->task_submited > 0 ? ($course->task_submited / $course->tasks->count() * 100) : 0;
+            $course->task_submited_percentage = round($course->task_submited_percentage);
+
 
             $course->task_unsubmited = $course->tasks->filter(function ($task) use ($student) {
                 return $task->hasNotUploaded($student->id);
             })->count();
             $course->task_unsubmited_percentage = $course->task_unsubmited > 0 ? ($course->task_unsubmited / $course->tasks->count() * 100) : 0;
+            $course->task_unsubmited_percentage = round($course->task_unsubmited_percentage);
+
 
             return $course;
         });
@@ -79,16 +85,19 @@ class TaskController extends Controller
                     return $task->hasAssessed($student->id);
                 })->count();
                 $course->task_finished_percentage = $course->task_finished > 0 ?  ($course->task_finished/ $course->tasks->count() * 100) : 0;
+                $course->task_finished_percentage = round($course->task_finished_percentage);
 
                 $course->task_submited = $course->tasks->filter(function ($task) use ($student) {
                     return $task->hasUploaded($student->id);
                 })->count();
                 $course->task_submited_percentage = $course->task_submited > 0 ? ($course->task_submited / $course->tasks->count() * 100) : 0;
+                $course->task_submited_percentage = round($course->task_submited_percentage);
 
                 $course->task_unsubmited = $course->tasks->filter(function ($task) use ($student) {
                     return $task->hasNotUploaded($student->id);
                 })->count();
                 $course->task_unsubmited_percentage = $course->task_unsubmited > 0 ? ($course->task_unsubmited / $course->tasks->count() * 100) : 0;
+                $course->task_unsubmited_percentage = round($course->task_unsubmited_percentage);
 
                 return $course;
             });
@@ -162,6 +171,6 @@ class TaskController extends Controller
 
         $action = TaskUpload::create($params);
 
-        return redirect()->route('student.task.index')->with('msg', 'Tugas berhasil di upload');
+        return redirect()->route('student.task.index')->with('message', 'Tugas berhasil di upload');
     }
 }

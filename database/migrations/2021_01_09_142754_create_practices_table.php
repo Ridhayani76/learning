@@ -14,10 +14,10 @@ class CreatePracticesTable extends Migration
     public function up()
     {
         Schema::create('practices', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('skill_id');
+            $table->uuid('id')->primary();
+            $table->uuid('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('agency_id');
+            $table->uuid('agency_id');
             $table->foreign('agency_id')->references('id')->on('agencies')->onUpdate('cascade')->onDelete('cascade');
             $table->date('start');
             $table->date('end');

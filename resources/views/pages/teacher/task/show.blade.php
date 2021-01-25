@@ -37,8 +37,6 @@
 
     <div class="container">
 
-        @include('layouts.message')
-
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -61,10 +59,12 @@
                 </li>
                 <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
                     <ion-icon name="scan-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
-                    Detail
+                    {{ $task->title }}
                 </li>
             </ol>
         </nav>
+
+        @include('layouts.message')
 
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -285,7 +285,7 @@
                                 <input type="number" id="task-score" name="score" max="100" min="0" class="mb-4 form-control" placeholder="0-100">
                                 <button class="btn btn-primary" type="submit">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <ion-icon name="create-outline" class="mr-2"></ion-icon> Update nilai
+                                        <ion-icon name="create-outline" class="mr-2"></ion-icon> Perbarui nilai
                                     </div>
                                 </button>
                             </td>

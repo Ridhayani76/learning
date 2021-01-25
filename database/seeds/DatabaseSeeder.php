@@ -103,8 +103,8 @@ class DatabaseSeeder extends Seeder
 
         // caldendar academic
         $calendars = ['Gasal', 'Genap', 'Khusus'];
-        $starts = ['2020-01-01', '2020-04-01', '2020-07-01'];
-        $ends = ['2020-03-01', '2020-06-01', '2020-10-01'];
+        $starts = ['2021-01-01', '2021-04-01', '2021-07-01'];
+        $ends = ['2021-03-01', '2021-06-01', '2021-10-01'];
 
         foreach ($calendars as $i => $calendar) {
             $calendar = \App\CalendarAcademic::create([
