@@ -8,8 +8,8 @@
                     <img src="{{asset('img/task.svg')}}" alt="" class="hero-image">
                 </div>
                 <div class="col-md-8">
-                    <h6 class="d-flex align-items-center">
-                        <ion-icon name="calendar-outline" style="font-size: 16px;" class="mr-1"></ion-icon>
+                    <h6 class="d-flex align-items-center" style="line-height: 0;">
+                        <ion-icon name="calendar-clear-outline" style="font-size: 16px;" class="mr-1"></ion-icon>
                         @if(date('Y-m-d') == $date)
                             Hari ini
                         @elseif(date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d')))) == $date)
@@ -17,7 +17,7 @@
                         @elseif(date('Y-m-d', strtotime('+1 days', strtotime(date('Y-m-d')))) == $date)
                             Besok
                         @else
-                            {{date('j F Y', strtotime($date))}}
+                            {{date('d / m / Y', strtotime($date))}}
                         @endif
                     </h6>
                     <h1>List Tugas</h1>

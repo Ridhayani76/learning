@@ -39,13 +39,13 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{route('teacher.dashboard')}}" class="d-flex align-items-center text-primary">
+                    <a href="{{route('student.dashboard')}}" class="d-flex align-items-center text-primary">
                         <ion-icon name="home-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
                         Home
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{route('teacher.practice.index')}}" class="text-primary d-flex align-items-center">
+                    <a href="{{route('student.practice.index')}}" class="text-primary d-flex align-items-center">
                         <ion-icon name="git-network-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
                         Wahana Praktik
                     </a>
@@ -63,7 +63,7 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
-                    Daftar Anggota
+                    Daftar Anggota Tim
                 </h5>
             </div>
             <div class="card-body" style="padding: 0px;">
@@ -92,13 +92,6 @@
                                         <ion-icon name="hourglass-outline" class="mr-1" style="font-size: 14px;"></ion-icon>
                                         Semester {{$member->semester}}
                                     </span>
-                                </td>
-                                <td class="text-center">
-                                    <a href="" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="d-flex align-items-center">
-                                            <ion-icon name="person-remove-outline" class="mr-2"></ion-icon> Batalkan
-                                        </span>
-                                    </a>
                                 </td>
                             </tr>
                         @endforeach

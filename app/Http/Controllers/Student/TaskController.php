@@ -67,7 +67,33 @@ class TaskController extends Controller
             return $course->tasks;
         })->flatten()->count();
 
-        $events = collect($courses)->map(function ($course) {
+
+        $courses_alltime = $this->course
+            ->orderBy('name', 'asc')
+            ->with(['tasks' => function ($task) use ($classroom) {
+                $task->where('classroom_id', $classroom->id)->get();
+            }])
+            ->get()
+            ->map(function ($course) use ($student) {
+                $course->task_finished = $course->tasks->filter(function ($task) use ($student) {
+                    return $task->hasAssessed($student->id);
+                })->count();
+                $course->task_finished_percentage = $course->task_finished > 0 ?  ($course->task_finished/ $course->tasks->count() * 100) : 0;
+
+                $course->task_submited = $course->tasks->filter(function ($task) use ($student) {
+                    return $task->hasUploaded($student->id);
+                })->count();
+                $course->task_submited_percentage = $course->task_submited > 0 ? ($course->task_submited / $course->tasks->count() * 100) : 0;
+
+                $course->task_unsubmited = $course->tasks->filter(function ($task) use ($student) {
+                    return $task->hasNotUploaded($student->id);
+                })->count();
+                $course->task_unsubmited_percentage = $course->task_unsubmited > 0 ? ($course->task_unsubmited / $course->tasks->count() * 100) : 0;
+
+                return $course;
+            });
+
+        $events = collect($courses_alltime)->map(function ($course) {
             return $course->tasks;
         })->flatten()->all();
         $events = collect($events)->map(function ($event) {
@@ -75,7 +101,7 @@ class TaskController extends Controller
                 $event->course->name . ' - ' . $event->title, //event title
                 true, //full day event?
                 $event->created_at->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
-                $event->created_at->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
+                $event->max_date_upload, //end time (you can also use Carbon instead of DateTime)
                 0, //optionally, you can specify an event ID
                 [
                     'backgroundColor' => $this->getColor($event),

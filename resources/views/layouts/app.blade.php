@@ -61,6 +61,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('teacher.calendar-academic.index') }}">
+                                    <ion-icon name="calendar-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Kalender') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link d-flex aign-items-center" href="{{ route('teacher.agency.index') }}">
                                     <ion-icon name="navigate-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                     {{ __('Tempat Praktik') }}
@@ -79,27 +85,45 @@
                                     {{ __('Tugas') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('student.practice.index') }}">
+                                    <ion-icon name="git-network-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Wahana Praktik') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('student.calendar-academic.index') }}">
+                                    <ion-icon name="calendar-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Kalender Akademik') }}
+                                </a>
+                            </li>
                         @elseif(Auth::user()->role == "admin")
                             <li class="nav-item">
-                                <a class="nav-link d-flex aign-items-center" href="{{ route('admin.teacher.index') }}">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.teacher.index') }}">
                                     <ion-icon name="person-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                     {{ __('Guru') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex aign-items-center" href="{{ route('admin.classroom.index') }}">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.classroom.index') }}">
                                     <ion-icon name="layers-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                     {{ __('Kelas') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex aign-items-center" href="{{ route('admin.course.index') }}">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.course.index') }}">
                                     <ion-icon name="book-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                     {{ __('Mata Kuliah') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex aign-items-center" href="{{ route('admin.agency.index') }}">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.calendar-academic.index') }}">
+                                    <ion-icon name="calendar-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                    {{ __('Kalender') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.agency.index') }}">
                                     <ion-icon name="navigate-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                     {{ __('Tempat Praktik') }}
                                 </a>
@@ -128,15 +152,15 @@
                     @else
 
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link d-flex align-items-center dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="text-capitalize nav-link d-flex align-items-center dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <ion-icon name="person-circle-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
 
                             @if(Auth::user()->role == 'admin')
                                     {{ Auth::user()->username }}
                                 @elseif(Auth::user()->role == 'teacher')
-                                    {{ Auth::user()->teacher->name }}
+                                    {{ Auth::user()->teacher->firstName }}
                                 @elseif(Auth::user()->role == 'student')
-                                    {{ Auth::user()->student->name }}
+                                    {{ Auth::user()->student->firstName }}
                                 @endif
                             </a>
 

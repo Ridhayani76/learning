@@ -115,8 +115,8 @@ ion-icon {
     margin-left: 4px;
 }
 .form-control {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /*padding-top: 12px;*/
+    /*padding-bottom: 12px;*/
     border-radius: 6px;
     border-width: 2px;
     font-weight: 500;
@@ -157,4 +157,35 @@ ion-icon {
 }
 .card-calendar .card-body {
     overflow: auto;
+}
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+ul.timeline:before {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 9px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+}
+ul.timeline > li {
+    margin-bottom: 32px;
+    padding-left: 0px;
+}
+ul.timeline > li:before {
+    content: ' ';
+    background: white;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #2B7D75;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
 }

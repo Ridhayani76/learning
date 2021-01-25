@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/course', 'CourseController');
         Route::resource('/agency', 'AgencyController');
         Route::resource('/skill', 'SkillController');
+        Route::resource('/calendar-academic', 'CalendarAcademicController');
+        Route::resource('/calendar-academic-event', 'CalendarAcademicEventController');
     });
 
     // Teacher
@@ -60,6 +62,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/skill', 'SkillController');
         Route::resource('/practice', 'PracticeController');
         Route::resource('/practice-member', 'PracticeMemberController');
+        Route::resource('/calendar-academic', 'CalendarAcademicController');
+
     });
 
     // Student
@@ -67,6 +71,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'StudentController@dashboard')->name('dashboard');
 
         Route::resource('/task', 'Student\TaskController');
+        Route::resource('/practice', 'Student\PracticeController');
+        Route::resource('/practice-member', 'Student\PracticeMemberController');
+        Route::resource('/calendar-academic', 'CalendarAcademicController');
+
     });
 
 });

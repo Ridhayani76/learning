@@ -34,7 +34,7 @@ class PracticeController extends Controller
             'end' => $request->end,
         ]);
 
-        return redirect()->route('teacher.practice.show', ['practice' => $practice->id]);
+        return redirect()->route('teacher.practice.show', ['practice' => $practice->id])->with('message', 'Wahana Praktik Berhasil Dibuat. Tentukan Tim dan tambahkan Anggota.');
     }
 
     public function show ($id) {

@@ -17,8 +17,9 @@ class CreateCalendarAcademicEventsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('calendar_academic_id');
             $table->foreign('calendar_academic_id')->references('id')->on('calendar_academics')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('name');
-            $table->tinyInteger('order');
+            $table->date('start')->nullable();
+            $table->date('end')->nullable();
+            $table->string('event');
             $table->timestamps();
         });
     }

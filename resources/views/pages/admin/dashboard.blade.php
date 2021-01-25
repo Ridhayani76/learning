@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-8">
                     <h5>Selamat datang,</h5>
-                    <h1>{{Auth()->user()->username}}</h1>
+                    <h1 class="text-capitalize">{{Auth()->user()->username}}</h1>
                     <p class="text-muted d-flex align-items-center">Semoga harimu menyenangkan <ion-icon name="happy-outline" style="font-size: 18px;" class="ml-1"></ion-icon></p>
                 </div>
             </div>

@@ -64,7 +64,7 @@
                                     </td>
                                     <td style="vertical-align: middle">
                                         <h6>Jumlah murid</h6>
-                                        <span class="d-flex align-items-center" style="letter-spacing: 1.2px; font-weight: 500;">
+                                        <span class="d-flex text-muted align-items-center" style="letter-spacing: 1.2px; font-weight: 500;">
                                             <ion-icon name="people-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
                                             {{$classroom->students->count()}}
                                         </span>

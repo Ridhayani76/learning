@@ -84,6 +84,43 @@ class DatabaseSeeder extends Seeder
 
         }
 
+        $agencies = [
+            'Jakarta Hospital',
+            'West Java Hospital',
+            'Central Java Hospital',
+            'East Java Hospital',
+        ];
+
+        foreach ($agencies as $agency) {
+            \App\Agency::create([
+                'name' => $agency,
+                'address' => $faker->country,
+                'phone' => $faker->phoneNumber,
+            ]);
+        }
+
+        $skill = \App\Skill::create(['name' => 'Keperawatan']);
+
+        // caldendar academic
+        $calendars = ['Gasal', 'Genap', 'Khusus'];
+        $starts = ['2020-01-01', '2020-04-01', '2020-07-01'];
+        $ends = ['2020-03-01', '2020-06-01', '2020-10-01'];
+
+        foreach ($calendars as $i => $calendar) {
+            $calendar = \App\CalendarAcademic::create([
+                'semester' => $calendar,
+                'year' => 2021,
+            ]);
+
+            foreach (range(1, 15) as $item) {
+                \App\CalendarAcademicEvent::create([
+                    'calendar_academic_id' => $calendar->id,
+                    'start' => $faker->dateTimeBetween($starts[$i], $ends[$i], 'Asia/Jakarta'),
+                    'end' => $faker->dateTimeBetween($starts[$i], $ends[$i], 'Asia/Jakarta'),
+                    'event' => $faker->realText($maxNbChars = 20, $indexSize = 2)
+                ]);
+            }
+        }
 
     }
 }

@@ -15,10 +15,8 @@ class CreateCalendarAcademicsTable extends Migration
     {
         Schema::create('calendar_academics', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('semester');
+            $table->string('semester');
             $table->year('year');
-            $table->date('start');
-            $table->date('end');
             $table->timestamps();
         });
     }

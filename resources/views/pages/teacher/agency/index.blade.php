@@ -70,14 +70,14 @@
                                             {{$agency->name}}
                                         </span>
                                     </td>
-                                    <td style="vertical-align: middle">
+                                    <td style="vertical-align: middle;">
                                         <h6>Kontak</h6>
                                         <span class="d-flex align-items-center text-muted" style="font-weight: 500; letter-spacing: 1.2px;">
                                             <ion-icon name="call-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
                                             {{$agency->phone}}
                                         </span>
                                     </td>
-                                    <td style="vertical-align: middle">
+                                    <td style="vertical-align: middle;">
                                         <h6>Alamat</h6>
                                         <span class="d-flex align-items-center text-muted">
                                             <ion-icon name="location-outline" class="mr-1" style="font-size: 14px;"></ion-icon>

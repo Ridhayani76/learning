@@ -12,11 +12,12 @@
                     <h1>Wahana Praktik</h1>
                     <p class="text-muted">Klik tombol dibawah untuk membuat wahana praktik</p>
 
-                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        <span class="d-flex align-items-center">
-                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Baru
-                        </span>
-                    </a>
+{{--                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">--}}
+{{--                        <span class="d-flex align-items-center">--}}
+{{--                            <ion-icon name="create-outline" class="mr-1"></ion-icon> Buat Baru--}}
+{{--                        </span>--}}
+{{--                    </a>--}}
+
                 </div>
             </div>
         </div>
@@ -27,7 +28,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{route('teacher.dashboard')}}" class="d-flex align-items-center">
+                    <a href="{{route('student.dashboard')}}" class="d-flex align-items-center">
                         <ion-icon name="home-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
                         Home
                     </a>
@@ -98,9 +99,9 @@
                                             <a href="" class="btn btn-outline-danger btn-sm mr-2 line-0" data-toggle="tooltip" data-placement="top" title="Hapus" style="padding: 10px">
                                                 <ion-icon name="trash-outline" size="small"></ion-icon>
                                             </a>
-                                            <a href="{{route('teacher.practice.show', ['practice' => $practice->id])}}" class="btn btn-outline-primary btn-sm">
+                                            <a href="{{route('student.practice.show', ['practice' => $practice->id])}}" class="btn btn-outline-primary btn-sm">
                                                 <span class="d-flex align-items-center">
-                                                    Detail
+                                                    Lihat Tim
                                                     <ion-icon name="arrow-forward-outline" class="ml-1"></ion-icon>
                                                 </span>
                                             </a>
