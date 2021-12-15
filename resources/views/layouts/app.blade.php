@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Learning') }}</title>
 
     <link rel="icon" href="{{asset('img/practice-2.svg')}}">
 
@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand font-weight-bold text-primary" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                {{ config('app.name', 'Learning') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -55,27 +55,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('teacher.practice.index') }}">
-                                    <ion-icon name="git-network-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Wahana Praktik') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center" href="{{ route('teacher.calendar-academic.index') }}">
                                     <ion-icon name="calendar-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                     {{ __('Kalender') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex aign-items-center" href="{{ route('teacher.agency.index') }}">
-                                    <ion-icon name="navigate-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Tempat Praktik') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('teacher.skill.index') }}">
-                                    <ion-icon name="flask-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Kompetensi') }}
                                 </a>
                             </li>
                         @elseif(Auth::user()->role == "student")
@@ -83,12 +65,6 @@
                                 <a class="nav-link d-flex align-items-center" href="{{ route('student.task.index') }}">
                                     <ion-icon name="folder-open-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                     {{ __('Tugas') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('student.practice.index') }}">
-                                    <ion-icon name="git-network-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Wahana Praktik') }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -120,18 +96,6 @@
                                 <a class="nav-link d-flex align-items-center" href="{{ route('admin.calendar-academic.index') }}">
                                     <ion-icon name="calendar-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                     {{ __('Kalender') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.agency.index') }}">
-                                    <ion-icon name="navigate-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Tempat Praktik') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.skill.index') }}">
-                                    <ion-icon name="flask-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Kompetensi') }}
                                 </a>
                             </li>
                         @endif

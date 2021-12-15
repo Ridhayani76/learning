@@ -19,6 +19,7 @@ class TeacherController extends Controller
     }
     //
     public function dashboard () {
+        $teacher = \Auth::user()->teacher;
 
         $course_ids = $this->course
             ->where('teacher_id', auth()->user()->teacher->id)
