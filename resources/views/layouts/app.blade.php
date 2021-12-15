@@ -154,7 +154,7 @@
 
     <footer class="footer">
         <div class="container text-center text-muted">
-            Copyright &copy; {{date('Y')}}, <a href="http://irfanmaulana.com" class="font-weight-bold text-primary">Ahmad Irfan Maulana</a>.
+            Copyright &copy; {{date('Y')}}, <a href="#" class="font-weight-bold text-primary">MAN 01 Alor</a>.
         </div>
     </footer>
 </div>
