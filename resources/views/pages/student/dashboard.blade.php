@@ -57,13 +57,6 @@
                             <ion-icon name="calendar-outline" style="font-size: 14px;" class="mr-2"></ion-icon> {{date('j F Y')}}.
                         </span>
                     </div>
-
-                    <a href="" class="btn btn-outline-primary">
-                        <span class="d-flex align-items-center">
-                            Semua
-                            <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
-                        </span>
-                    </a>
                 </div>
 
                 <div class="card-body" style="padding: 0px;">
@@ -79,7 +72,7 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{route('teacher.task.show', ['task' => $task->id])}}" class="btn btn-link btn-sm">
+                                    <a href="{{url(Storage::url($task->file))}}" class="btn btn-link btn-sm">
                                         <span class="d-flex align-items-center">
                                             Buka <ion-icon name="open-outline" class="ml-2"></ion-icon>
                                         </span>
