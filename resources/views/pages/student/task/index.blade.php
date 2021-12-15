@@ -206,7 +206,7 @@
                                                 <td style="{{$i == 0 ? 'border-top: 0px;' : ''}}">
 
                                                     @if ($task->hasNotUploaded(auth()->user()->student->id))
-                                                    <a href="" class="btn btn-outline-primary" onclick="upload(event, {{$task->id}}, '{{$task->course->name}}', '{{$task->title}}')">
+                                                    <a href="" class="btn btn-outline-primary" onclick="upload(event, {{$task->id}}, '{{$task->course->name}}', '{{$task->title}}')" data-toggle="modal" data-target="#exampleModal">
                                                         <span class="d-flex align-items-center">
                                                             <ion-icon name="navigate-circle-outline" class="mr-2"></ion-icon>
                                                             Upload Tugas
