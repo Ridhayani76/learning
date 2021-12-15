@@ -171,7 +171,7 @@
                 <input type="hidden" name="classroom_id" value="{{$classroom->id}}">
 
                 <div class="form-group row align-items-center">
-                    <div class="col-3 text-right">Mata Kuliah</div>
+                    <div class="col-3 text-right">Mata Pelajaran</div>
                     <div class="col-9">
                         <select name="course_id" class="form-control">
                             @foreach(\App\Course::where('teacher_id', auth()->user()->teacher->id)->orderBy('name', 'asc')->get() as $course)

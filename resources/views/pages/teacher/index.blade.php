@@ -71,7 +71,7 @@
                                 </span>
                             </td>
                             <td style="vertical-align: middle">
-                                <h6>Mata kuliah</h6>
+                                <h6>Mata pelajaran</h6>
                                 <span class="d-flex align-items-center text-muted" style="font-weight: 500;">
                                     <ion-icon name="book-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
                                     {{$teacher->courses->count()}}

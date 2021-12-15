@@ -79,7 +79,7 @@
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center" href="{{ route('admin.course.index') }}">
                                 <ion-icon name="book-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                {{ __('Mata Kuliah') }}
+                                {{ __('Mata Pelajaran') }}
                             </a>
                         </li>
                         @endif

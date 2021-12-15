@@ -94,7 +94,7 @@
                             @foreach($courses as $i => $course)
                             <tr>
                                 <td>
-                                    <h6>Mata Kuliah</h6>
+                                    <h6>Mata Pelajaran</h6>
                                     <span class="d-flex align-items-center text-muted">
                                         <ion-icon name="book-outline" class="mr-2" style="font-size: 14px"></ion-icon> {{$course->name}}
                                     </span>
@@ -258,7 +258,7 @@
 
                             @if($courses->count() == 0)
                             <tr>
-                                <td colspan="6" class="text-center">Tidak ada mata kuliah</td>
+                                <td colspan="6" class="text-center">Tidak ada mata pelajaran</td>
                             </tr>
                             @endif
 

@@ -8,8 +8,8 @@
                 <img src="{{asset('img/undraw_environmental_study_re_q4q8.svg')}}" alt="" class="hero-image">
             </div>
             <div class="col-md-8">
-                <h1>Mata Kuliah</h1>
-                <p class="text-muted">Klik tombol dibawah untuk membuat mata kuliah baru</p>
+                <h1>Mata Pelajaran</h1>
+                <p class="text-muted">Klik tombol dibawah untuk membuat mata pelajaran baru</p>
 
                 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     <span class="d-flex align-items-center">
@@ -32,7 +32,7 @@
             </li>
             <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
                 <ion-icon name="book-outline" style="font-size: 14px;" class="mr-1"></ion-icon>
-                Mata Kuliah
+                Mata Pelajaran
             </li>
         </ol>
     </nav>
@@ -44,8 +44,8 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <div>
-                        <h5 class="card-title mb-1">Daftar Mata Kuliah</h5>
-                        <span class="text-muted" style="font-size: 12px;">Ada {{$courses->count()}} mata kuliah terdaftar.</span>
+                        <h5 class="card-title mb-1">Daftar Mata Pelajaran</h5>
+                        <span class="text-muted" style="font-size: 12px;">Ada {{$courses->count()}} mata pelajaran terdaftar.</span>
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                         @foreach($courses as $course)
                         <tr>
                             <td style="vertical-align: middle">
-                                <h6>Nama Matkul</h6>
+                                <h6>Nama Pelajaran</h6>
                                 <span class="d-flex align-items-center">
                                     <ion-icon name="book-outline" class="mr-2" style="font-size: 14px;"></ion-icon>
                                     {{$course->name}}
@@ -88,7 +88,7 @@
 
                         @if($courses->count() == 0)
                         <tr>
-                            <td colspan="6" class="text-center">Tidak ada Mata kuliah.</td>
+                            <td colspan="6" class="text-center">Tidak ada Mata pelajaran.</td>
                         </tr>
                         @endif
 
@@ -107,7 +107,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Kuliah</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Pelajaran</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -125,7 +125,7 @@
                 </div>
 
                 <div class="form-group row align-items-center">
-                    <div class="col-3 text-right">Nama Matkul</div>
+                    <div class="col-3 text-right">Nama Pelajaran</div>
                     <div class="col-9">
                         <input type="text" class="form-control" name="name" value="{{old('name')}}">
                     </div>
