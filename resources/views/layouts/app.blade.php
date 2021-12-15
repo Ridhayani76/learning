@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,11 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Learning') }}</title>
+    <title>Learning</title>
 
     <link rel="icon" href="{{asset('img/practice-2.svg')}}">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.css" />
 
 
 
@@ -31,106 +32,88 @@
 
     @yield('css')
 </head>
+
 <body>
-<div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
-        <div class="container">
-            <a class="navbar-brand font-weight-bold text-primary" href="{{ url('/') }}">
-                {{ config('app.name', 'Learning') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+            <div class="container">
+                <a class="navbar-brand font-weight-bold text-primary" href="{{ url('/') }}">
+                    MAN 1 Alor
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
 
-                    @if(!Auth::guest())
+                        @if(!Auth::guest())
                         @if(Auth::user()->role == "teacher")
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('teacher.task.index') }}">
-                                    <ion-icon name="folder-open-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Penugasan') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('teacher.calendar-academic.index') }}">
-                                    <ion-icon name="calendar-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Kalender') }}
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="{{ route('teacher.task.index') }}">
+                                <ion-icon name="folder-open-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                {{ __('Penugasan') }}
+                            </a>
+                        </li>
                         @elseif(Auth::user()->role == "student")
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('student.task.index') }}">
-                                    <ion-icon name="folder-open-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Tugas') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('student.calendar-academic.index') }}">
-                                    <ion-icon name="calendar-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Kalender Akademik') }}
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="{{ route('student.task.index') }}">
+                                <ion-icon name="folder-open-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                {{ __('Tugas') }}
+                            </a>
+                        </li>
                         @elseif(Auth::user()->role == "admin")
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.teacher.index') }}">
-                                    <ion-icon name="person-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Guru') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.classroom.index') }}">
-                                    <ion-icon name="layers-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Kelas') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.course.index') }}">
-                                    <ion-icon name="book-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Mata Kuliah') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="{{ route('admin.calendar-academic.index') }}">
-                                    <ion-icon name="calendar-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
-                                    {{ __('Kalender') }}
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="{{ route('admin.teacher.index') }}">
+                                <ion-icon name="person-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                {{ __('Guru') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="{{ route('admin.classroom.index') }}">
+                                <ion-icon name="layers-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                {{ __('Kelas') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="{{ route('admin.course.index') }}">
+                                <ion-icon name="book-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
+                                {{ __('Mata Kuliah') }}
+                            </a>
+                        </li>
                         @endif
-                    @endif
+                        @endif
 
-                </ul>
+                    </ul>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center" href="{{ route('login') }}">
                                 <ion-icon name="log-in-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
                                 {{ __('Login') }}
                             </a>
                         </li>
-                    @else
+                        @else
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="text-capitalize nav-link d-flex align-items-center dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <ion-icon name="person-circle-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
 
-                            @if(Auth::user()->role == 'admin')
-                                    {{ Auth::user()->username }}
+                                @if(Auth::user()->role == 'admin')
+                                {{ Auth::user()->username }}
                                 @elseif(Auth::user()->role == 'teacher')
-                                    {{ Auth::user()->teacher->firstName }}
+                                {{ Auth::user()->teacher->firstName }}
                                 @elseif(Auth::user()->role == 'student')
-                                    {{ Auth::user()->student->firstName }}
+                                {{ Auth::user()->student->firstName }}
                                 @endif
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     <ion-icon name="log-out-outline" class="mr-2" style="font-size: 18px;"></ion-icon>
 
@@ -142,112 +125,116 @@
                                 </form>
                             </div>
                         </li>
-                    @endguest
-                </ul>
+                        @endguest
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <main class="py-4" style="min-height: 100vh;">
-        @yield('content')
-    </main>
+        <main class="py-4" style="min-height: 100vh;">
+            @yield('content')
+        </main>
 
-    <footer class="footer">
-        <div class="container text-center text-muted">
-            Copyright &copy; {{date('Y')}}, <a href="#" class="font-weight-bold text-primary">MAN 01 Alor</a>.
-        </div>
-    </footer>
-</div>
+        <footer class="footer">
+            <div class="container text-center text-muted">
+                Copyright &copy; {{date('Y')}}, <a href="#" class="font-weight-bold text-primary">MAN 01 Alor</a>.
+            </div>
+        </footer>
+    </div>
 
-@include('sweetalert::alert')
-<script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+    @include('sweetalert::alert')
+    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
 
-        $('.ajax').click(function (e) {
-            e.preventDefault();
+            $('.ajax').click(function(e) {
+                e.preventDefault();
 
-            let token = $('meta[name="csrf-token"]').attr('content');
-            let text = $(this).data('text');
+                let token = $('meta[name="csrf-token"]').attr('content');
+                let text = $(this).data('text');
 
-            Swal.fire({
-                "title": "Konfirmasi",
-                "text": text ? text : "Apakah kamu yakin ?",
-                "width":"32rem",
-                "heightAuto":true,
-                "padding":"1.25rem",
-                "showConfirmButton":true,
-                "showCloseButton":false,
-                "customClass":{
-                    "container":null,
-                    "popup":null,
-                    "header":null,
-                    "title":null,
-                    "closeButton":null,
-                    "icon":null,
-                    "image":null,
-                    "content":null,
-                    "input":null,
-                    "actions":null,
-                    "confirmButton":"btn btn-primary",
-                    "cancelButton":null,"footer":null
-                },
-                "icon":"question",
-                "showCancelButton":true,
-                "cancelButtonText":"Batalkan",
-                "cancelButtonColor":"#aaa",
-                "confirmButtonText":"Konfirmasi",
-                "confirmButtonColor":"#2B7D75",
-                "allowOutsideClick":false
-            }).then((result) => {
-                if (result.isConfirmed) {
+                Swal.fire({
+                    "title": "Konfirmasi",
+                    "text": text ? text : "Apakah kamu yakin ?",
+                    "width": "32rem",
+                    "heightAuto": true,
+                    "padding": "1.25rem",
+                    "showConfirmButton": true,
+                    "showCloseButton": false,
+                    "customClass": {
+                        "container": null,
+                        "popup": null,
+                        "header": null,
+                        "title": null,
+                        "closeButton": null,
+                        "icon": null,
+                        "image": null,
+                        "content": null,
+                        "input": null,
+                        "actions": null,
+                        "confirmButton": "btn btn-primary",
+                        "cancelButton": null,
+                        "footer": null
+                    },
+                    "icon": "question",
+                    "showCancelButton": true,
+                    "cancelButtonText": "Batalkan",
+                    "cancelButtonColor": "#aaa",
+                    "confirmButtonText": "Konfirmasi",
+                    "confirmButtonColor": "#2B7D75",
+                    "allowOutsideClick": false
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    $.ajax({
-                        url: $(this).data('url'),
-                        method: 'POST',
-                        data: {_token: token },
-                        success: function (response) {
-                            Swal.fire({
-                                title: 'Berhasil',
-                                text: response.message,
-                                icon: 'success',
-                                confirmButtonText: 'Tutup',
-                                confirmButtonColor: '#2B7D75',
-                            })
+                        $.ajax({
+                            url: $(this).data('url'),
+                            method: 'POST',
+                            data: {
+                                _token: token
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: 'Berhasil',
+                                    text: response.message,
+                                    icon: 'success',
+                                    confirmButtonText: 'Tutup',
+                                    confirmButtonColor: '#2B7D75',
+                                })
 
-                            if (response.redirect)
-                                window.location = response.redirect;
-                        },
-                        error: function () {
-                            Swal.fire({
-                                title: 'Gagal',
-                                text: 'Data tidak bisa diproses. Silahkan coba kembali.',
-                                icon: 'error',
-                                confirmButtonText: 'Coba Kembali',
-                                confirmButtonColor: '#2B7D75',
-                            })
-                        }
-                    })
+                                if (response.redirect)
+                                    window.location = response.redirect;
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    title: 'Gagal',
+                                    text: 'Data tidak bisa diproses. Silahkan coba kembali.',
+                                    icon: 'error',
+                                    confirmButtonText: 'Coba Kembali',
+                                    confirmButtonColor: '#2B7D75',
+                                })
+                            }
+                        })
 
 
-                }
+                    }
+                });
+
             });
 
-        });
+            $('#exampleModal').on('show.bs.modal', function() {
+                setTimeout(() => {
+                    if ($('#exampleModal .autofocus').length > 0) {
+                        $('#exampleModal .autofocus')[0].focus();
+                    }
+                }, 500);
+            })
 
-        $('#exampleModal').on('show.bs.modal', function() {
-            setTimeout(() => {
-                if ($('#exampleModal .autofocus').length > 0) {
-                    $('#exampleModal .autofocus')[0].focus();
-                }
-            }, 500);
         })
+    </script>
 
-    })
-</script>
-
-@yield('js')
+    @yield('js')
 </body>
+
 </html>

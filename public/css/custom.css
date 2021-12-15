@@ -1,25 +1,30 @@
 * {
     font-family: 'Montserrat', sans-serif;
 }
+
 body {
     font-size: 14px;
     background: #f7f9f9;
 }
+
 .jumbotron {
     /*background: rgba(43,125,117, 0.2);*/
-    background: #c6e0c6;
+    background: #9EC5FE;
     border-radius: 0px;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     padding-bottom: 125px;
 }
-.jumbotron + .container {
+
+.jumbotron+.container {
     margin-top: -125px;
 }
+
 .hero-image {
     height: 200px;
     width: 100%;
 }
+
 /*.btn {*/
 /*    border-radius: 8px;*/
 /*    font-weight: 500;*/
@@ -35,9 +40,11 @@ body {
 ion-icon {
     font-size: 24px;
 }
+
 .navbar .nav-item {
     font-weight: 500;
 }
+
 .navbar-expand-md .navbar-nav .nav-link {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -50,23 +57,28 @@ ion-icon {
     border: 0px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px -8px;
 }
+
 .card-header {
     background: #fff;
     border-bottom: 0px;
     padding: 24px 20px;
     border-radius: 8px !important;
 }
+
 .card-header:first-child {
     border-top-left-radius: 16px !important;
     border-top-right-radius: 16px !important;
 }
+
 .card-title {
     margin-bottom: 0px;
     font-weight: 500;
 }
+
 .card-title .text-primary {
     font-size: 12px;
 }
+
 .card-body:last-child {
     padding-bottom: 8px !important;
     border-bottom-left-radius: 8px !important;
@@ -76,16 +88,19 @@ ion-icon {
 .table {
     border: 0px;
 }
-.table.table-striped tr td{
+
+.table.table-striped tr td {
     /*border: 0px;*/
     background: #fff;
     padding: 30px 22px;
     border-color: #eee;
 }
+
 .table.table-striped tr td h6 {
     font-size: 14px;
     font-weight: 500;
 }
+
 .table.table-striped tr td .value {
     font-size: 16px;
 }
@@ -101,9 +116,11 @@ ion-icon {
     font-size: 14px;
     border-width: 2px;
 }
+
 .line-0 {
     line-height: 0;
 }
+
 .footer {
     padding: 20px 0px;
 }
@@ -114,6 +131,7 @@ ion-icon {
     margin-bottom: 3px !important;
     margin-left: 4px;
 }
+
 .form-control {
     /*padding-top: 12px;*/
     /*padding-bottom: 12px;*/
@@ -131,6 +149,7 @@ ion-icon {
 .modal-content {
     border-radius: 8px;
 }
+
 .modal-header {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -151,10 +170,12 @@ ion-icon {
     left: 0;
     transition: .3s ease-in;
 }
+
 .card-calendar.hide {
     transform: translateY(100%);
     transition: .5s ease-out;
 }
+
 .card-calendar .card-body {
     overflow: auto;
 }
@@ -163,6 +184,7 @@ ul.timeline {
     list-style-type: none;
     position: relative;
 }
+
 ul.timeline:before {
     content: ' ';
     background: #d4d9df;
@@ -173,11 +195,13 @@ ul.timeline:before {
     height: 100%;
     z-index: 400;
 }
-ul.timeline > li {
+
+ul.timeline>li {
     margin-bottom: 32px;
     padding-left: 0px;
 }
-ul.timeline > li:before {
+
+ul.timeline>li:before {
     content: ' ';
     background: white;
     display: inline-block;

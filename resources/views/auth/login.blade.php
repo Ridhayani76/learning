@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row d-flex align-items-end">
             <div class="col-md-4">
-                <img src="{{asset('img/practice.svg')}}" alt="" class="hero-image">
+                <img src="{{asset('img/undraw_login_re_4vu2.svg')}}" alt="" class="hero-image">
             </div>
             <div class="col-md-8">
                 <h1 class="mb-3">Sign In</h1>
@@ -30,9 +30,9 @@
                                 <input id="username" placeholder="Username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required>
 
                                 @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -43,9 +43,9 @@
                                 <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
