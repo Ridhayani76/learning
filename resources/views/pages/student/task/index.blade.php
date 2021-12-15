@@ -305,7 +305,7 @@
                 <div class="form-group row align-items-center">
                     <div class="col-3 text-right">Tugas</div>
                     <div class="col-9">
-                        <input type="text" name="task_id" class="form-control" style="visibility: hidden; position:absolute;" id="task-id">
+                        <input type="text" name="task_id" class="form-control" style="visibility: hidden; position:absolute;" id="task-id" value="{{$task->id}}">
                         <input type="text" class="form-control" disabled id="tugas">
                     </div>
                 </div>
